@@ -6,11 +6,9 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Set page to wide mode to hold multiple visual columns side-by-side
 st.set_page_config(layout="wide")
-
 st.title("Elite Hockey Analytics & Trajectory Hub")
-st.write("Advanced predictive modeling with visual comparison metrics.")
+st.write("6-Dimensional predictive modeling (NHLe, Age, Volume, EV%, Goal Dependency, Size).")
 
 test_players = {
     "Brayden Yager (WPG)": 8484242,
@@ -19,7 +17,6 @@ test_players = {
     "Landon DuPont (Undrafted)": 0
 }
 
-# Move search dropdown to a sidebar to clean up main screen
 selected_player_name = st.sidebar.selectbox("Choose a Prospect:", list(test_players.keys()))
 player_id = test_players[selected_player_name]
 analyze_btn = st.sidebar.button("Run Advanced Analytics")
@@ -29,37 +26,49 @@ nhle_factors = {
     "AHL": 0.47, "NCAA": 0.43, "NHL": 1.00, "CSSHL": 0.15
 }
 
-# --- UPGRADED HISTORICAL DATABASE (PPG BUG FIXED) ---
+# --- UPGRADED 6-DIMENSIONAL HISTORICAL DATABASE ---
+# Added EV% (Even Strength Dependency), Goal% (Play-Driving Proxy), and Size Index (Height in inches + Weight/10)
 historical_comps = [
-    {"Name": "Connor McDavid (Historical)", "NHLe": 68.0, "PPG": 2.37, "Age": 16, "SGP": 4.5, "Ceiling": "Generational", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8478402.png"},
-    {"Name": "Nathan MacKinnon (Historical)", "NHLe": 55.0, "PPG": 1.62, "Age": 16, "SGP": 4.2, "Ceiling": "Franchise Player", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477444.png"},
-    {"Name": "Bo Horvat (Historical)", "NHLe": 38.0, "PPG": 1.10, "Age": 19, "SGP": 3.2, "Ceiling": "Top 6 Forward", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477500.png"},
-    {"Name": "Vincent Trocheck (Historical)", "NHLe": 42.0, "PPG": 1.25, "Age": 19, "SGP": 3.5, "Ceiling": "Top 6 Forward", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8476389.png"},
-    {"Name": "AHL Journeyman (Historical)", "NHLe": 22.0, "PPG": 0.65, "Age": 20, "SGP": 1.8, "Ceiling": "AHL / Fringe", "ImageURL": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Generic_jersey_icon.png"}
+    {"Name": "Connor McDavid (Historical)", "NHLe": 68.0, "Age": 16, "SGP": 4.5, "EV_Pct": 0.70, "Goal_Pct": 0.35, "Size": 90, "Ceiling": "Generational", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8478402.png"},
+    {"Name": "Nathan MacKinnon (Historical)", "NHLe": 55.0, "Age": 16, "SGP": 4.2, "EV_Pct": 0.65, "Goal_Pct": 0.42, "Size": 91, "Ceiling": "Franchise Player", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477444.png"},
+    {"Name": "Bo Horvat (Historical)", "NHLe": 38.0, "Age": 19, "SGP": 3.2, "EV_Pct": 0.55, "Goal_Pct": 0.40, "Size": 93, "Ceiling": "Top 6 Forward", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477500.png"},
+    {"Name": "Vincent Trocheck (Historical)", "NHLe": 42.0, "Age": 19, "SGP": 3.5, "EV_Pct": 0.60, "Goal_Pct": 0.45, "Size": 88, "Ceiling": "Top 6 Forward", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8476389.png"},
+    {"Name": "AHL Journeyman (Historical)", "NHLe": 22.0, "Age": 20, "SGP": 1.8, "EV_Pct": 0.40, "Goal_Pct": 0.25, "Size": 90, "Ceiling": "AHL / Fringe", "ImageURL": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Generic_jersey_icon.png"}
 ]
 
+# ALGORITHM WEIGHTS 
 WEIGHT_NHLE = 1.0     
 WEIGHT_AGE = 3.0      
-WEIGHT_SGP = 1.5      
+WEIGHT_SGP = 1.5 
+WEIGHT_EV = 2.0      # Heavy weight to penalize powerplay merchants
+WEIGHT_GOAL = 1.0
+WEIGHT_SIZE = 0.5    # Smallest weight, size matters but less than production
 
-# --- GRAPHING TOOL: Create Spider Chart Function ---
-def create_spider_chart(prospect_profile, comp_profile):
+# --- GRAPHING TOOL: 6-Axis Hexagon Chart ---
+def create_hexagon_chart(prospect_profile, comp_profile):
     MAX_AGE = 22
     MAX_NHLE = 75
     MAX_SGP = 6.0
+    MAX_SIZE = 100 # Approx 6'4 220lbs
     
-    categories = ['Youth Factor', 'NHLe Production', 'Offensive Volume']
+    categories = ['Youth Factor', 'NHLe Production', 'Offensive Volume', 'Even-Strength %', 'Goal Dependency', 'Physical Size']
     
     prospect_values = [
         (1 - (prospect_profile['Age'] / MAX_AGE)) * 100,
         (prospect_profile['NHLe'] / MAX_NHLE) * 100,
-        (prospect_profile['SGP'] / MAX_SGP) * 100
+        (prospect_profile['SGP'] / MAX_SGP) * 100,
+        prospect_profile['EV_Pct'] * 100,
+        prospect_profile['Goal_Pct'] * 100,
+        (prospect_profile['Size'] / MAX_SIZE) * 100
     ]
     
     comp_values = [
         (1 - (comp_profile['Age'] / MAX_AGE)) * 100,
         (comp_profile['NHLe'] / MAX_NHLE) * 100,
-        (comp_profile['SGP'] / MAX_SGP) * 100
+        (comp_profile['SGP'] / MAX_SGP) * 100,
+        comp_profile['EV_Pct'] * 100,
+        comp_profile['Goal_Pct'] * 100,
+        (comp_profile['Size'] / MAX_SIZE) * 100
     ]
 
     prospect_values += prospect_values[:1]
@@ -68,8 +77,7 @@ def create_spider_chart(prospect_profile, comp_profile):
     angles += angles[:1]
 
     fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
-    
-    plt.xticks(angles[:-1], categories, size=12)
+    plt.xticks(angles[:-1], categories, size=10)
     ax.set_rlabel_position(0)
     plt.yticks([25,50,75], ["25%","50%","75%"], color="grey", size=8)
     plt.ylim(0,100)
@@ -83,10 +91,8 @@ def create_spider_chart(prospect_profile, comp_profile):
     plt.legend(loc='upper right', bbox_to_anchor=(0.1, 0.1))
     return fig
 
-
 # --- MAIN ANALYTICS LOGIC ---
 if analyze_btn:
-    
     prospect_image_url = "https://upload.wikimedia.org/wikipedia/commons/e/e0/Generic_jersey_icon.png"
 
     if player_id == 0:
@@ -100,12 +106,17 @@ if analyze_btn:
                 league = player_data['League'].values[0]
                 gp = int(player_data['GP'].values[0])
                 pts = int(player_data['PTS'].values[0])
+                goals = int(player_data['G'].values[0])
+                ppp = int(player_data['PPP'].values[0])
                 prospect_sgp = float(player_data['SGP'].values[0])
+                height_in = float(player_data['Height'].values[0])
+                weight_lbs = float(player_data['Weight'].values[0])
                 prospect_image_url = player_data['ImageURL'].values[0]
 
-                ppg = pts / gp
-                factor = nhle_factors.get(league, 0)
-                prospect_nhle = round(ppg * factor * 82, 1)
+                prospect_nhle = round((pts / gp) * nhle_factors.get(league, 0) * 82, 1)
+                prospect_ev_pct = round((pts - ppp) / pts, 2) if pts > 0 else 0
+                prospect_goal_pct = round(goals / pts, 2) if pts > 0 else 0
+                prospect_size = height_in + (weight_lbs / 10) # Simple size index
             else: st.stop()
         else: st.stop()
 
@@ -116,41 +127,52 @@ if analyze_btn:
         if response.status_code == 200:
             data = response.json()
             birth_year = int(data.get("birthDate", "2000-01-01").split("-")[0])
+            height_in = data.get("heightInInches", 72)
+            weight_lbs = data.get("weightInPounds", 180)
             season_totals = data.get("seasonTotals", [])
             
             latest_season = season_totals[-1] 
             gp = latest_season.get("gamesPlayed", 1)
             pts = latest_season.get("points", 0)
+            goals = latest_season.get("goals", 0)
+            ppp = latest_season.get("powerPlayPoints", 0)
             shots = latest_season.get("shots", 0)
             league = latest_season.get("leagueAbbrev", "N/A")
             
             season_year = int(str(latest_season.get("season", "00000000"))[:4])
             prospect_age = season_year - birth_year
             
-            ppg = pts / gp
+            prospect_nhle = round((pts / gp) * nhle_factors.get(league, 0) * 82, 1)
             prospect_sgp = round(shots / gp, 2) if shots > 0 else 2.0
-            factor = nhle_factors.get(league, 0) 
-            prospect_nhle = round(ppg * factor * 82, 1)
+            prospect_ev_pct = round((pts - ppp) / pts, 2) if pts > 0 else 0
+            prospect_goal_pct = round(goals / pts, 2) if pts > 0 else 0
+            prospect_size = height_in + (weight_lbs / 10)
             
             prospect_image_url = f"https://assets.nhle.com/mugs/nhl/latest/{player_id}.png"
             
         else: st.stop()
 
-    current_prospect_profile = {'Age': prospect_age, 'NHLe': prospect_nhle, 'SGP': prospect_sgp}
+    current_prospect_profile = {
+        'Age': prospect_age, 'NHLe': prospect_nhle, 'SGP': prospect_sgp,
+        'EV_Pct': prospect_ev_pct, 'Goal_Pct': prospect_goal_pct, 'Size': prospect_size
+    }
 
+    # --- UPGRADED 6-DIMENSIONAL KNN MATH ---
     for comp in historical_comps:
         dist_nhle = WEIGHT_NHLE * (prospect_nhle - comp["NHLe"])**2
         dist_age = WEIGHT_AGE * (prospect_age - comp["Age"])**2
         dist_sgp = WEIGHT_SGP * (prospect_sgp - comp["SGP"])**2
+        dist_ev = WEIGHT_EV * ((prospect_ev_pct * 100) - (comp["EV_Pct"] * 100))**2 
+        dist_goal = WEIGHT_GOAL * ((prospect_goal_pct * 100) - (comp["Goal_Pct"] * 100))**2
+        dist_size = WEIGHT_SIZE * (prospect_size - comp["Size"])**2
         
-        distance = math.sqrt(dist_nhle + dist_age + dist_sgp)
+        distance = math.sqrt(dist_nhle + dist_age + dist_sgp + dist_ev + dist_goal + dist_size)
         comp["Distance"] = round(distance, 2)
     
     sorted_comps = sorted(historical_comps, key=lambda x: x["Distance"])
     top_match = sorted_comps[0] 
 
     st.write("---")
-    
     col1, col2, col3 = st.columns([1, 2, 2])
     
     with col1:
@@ -158,9 +180,7 @@ if analyze_btn:
         st.image(prospect_image_url, width=150)
         st.success(f"**{selected_player_name}**")
         st.write(f"Age: {prospect_age} | League: {league}")
-        
         st.write("vs.")
-        
         st.subheader("Closest AI Match")
         st.image(top_match['ImageURL'], width=150)
         st.warning(f"**{top_match['Name']}**")
@@ -168,27 +188,25 @@ if analyze_btn:
 
     with col2:
         st.subheader("Key Analytics Head-to-Head")
-        
         comp_df = pd.DataFrame({
-            "Metric": ["Age", "Points Per Game", "Shots Per Game (SGP)", "NHLe Projection"],
-            selected_player_name: [prospect_age, round(ppg, 2), prospect_sgp, prospect_nhle],
-            top_match['Name']: [top_match['Age'], top_match['PPG'], top_match['SGP'], top_match['NHLe']]
+            "Metric": ["NHLe Projection", "EV Production %", "Goal Dependency %", "Shots / Game"],
+            selected_player_name: [prospect_nhle, f"{int(prospect_ev_pct*100)}%", f"{int(prospect_goal_pct*100)}%", prospect_sgp],
+            top_match['Name']: [top_match['NHLe'], f"{int(top_match['EV_Pct']*100)}%", f"{int(top_match['Goal_Pct']*100)}%", top_match['SGP']]
         })
         st.dataframe(comp_df, use_container_width=True, hide_index=True)
         
         st.divider()
         st.write("### Consensus Projected Ceiling")
         ceiling = top_match['Ceiling']
-        if ceiling == "Generational": val = 100
-        elif ceiling == "Franchise Player": val = 85
-        elif ceiling == "Top 6 Forward": val = 70
-        else: val = 50
-        
+        val = 100 if ceiling == "Generational" else (85 if ceiling == "Franchise Player" else (70 if ceiling == "Top 6 Forward" else 50))
         st.progress(val, text=f"**Current Ceiling Tier: {ceiling}**")
 
-
     with col3:
-        st.subheader("Comparative Attribute Profile")
-        comp_profile = {'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP']}
-        spider_fig = create_spider_chart(current_prospect_profile, comp_profile)
+        st.subheader("6-Axis Comparative Profile")
+        
+        comp_profile = {
+            'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP'],
+            'EV_Pct': top_match['EV_Pct'], 'Goal_Pct': top_match['Goal_Pct'], 'Size': top_match['Size']
+        }
+        spider_fig = create_hexagon_chart(current_prospect_profile, comp_profile)
         st.pyplot(spider_fig)
