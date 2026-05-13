@@ -11,7 +11,6 @@ st.title("Elite Hockey Analytics & Trajectory Hub")
 st.write("6-Dimensional predictive modeling (NHLe, Age, Volume, EV%, Goal Dependency, Size).")
 
 # --- INITIALIZE APP MEMORY (SESSION STATE) ---
-# We give the app permanent memory so it stops forgetting your button clicks
 if 'search_results' not in st.session_state:
     st.session_state.search_results = {}
 if 'analyze_clicked' not in st.session_state:
@@ -25,7 +24,7 @@ search_query = st.sidebar.text_input("Enter Player Name (e.g., Aho, Mcdav, Iginl
 
 if st.sidebar.button("Find Players"):
     st.session_state.search_results = {} 
-    st.session_state.analyze_clicked = False # Reset the view on a new search
+    st.session_state.analyze_clicked = False 
     
     if search_query:
         # Route A: Search Local CSV
@@ -63,7 +62,6 @@ if st.session_state.search_results:
     st.sidebar.subheader("Step 2: Confirm & Analyze")
     selected_option = st.sidebar.selectbox("Select Exact Match:", list(st.session_state.search_results.keys()))
     
-    # When clicked, flip the memory switch to TRUE permanently
     if st.sidebar.button("Run Advanced Analytics"):
         st.session_state.analyze_clicked = True
         st.session_state.current_selection = selected_option
@@ -125,13 +123,10 @@ def calculate_ea_rating(profile):
     score_size = min(5, (profile['Size'] / 100.0) * 5)
     
     raw_score = score_nhle + score_age + score_sgp + score_ev + score_size
-    # Curve it perfectly to mimic standard video game tiers (60=AHL, 80=Star, 95=Generational)
     curved_overall = int(40 + (raw_score * 0.6))
     return min(99, curved_overall)
 
-
 # --- MAIN ANALYTICS LOGIC ---
-# The app now runs conditionally based on the permanent memory switch
 if st.session_state.analyze_clicked and st.session_state.current_selection:
     player_data_dict = st.session_state.search_results[st.session_state.current_selection]
     selected_player_name = player_data_dict["name"]
@@ -165,7 +160,7 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
             
             if season_totals:
                 latest_season = season_totals[-1] 
-                gp = max(1, latest_season.get("gamesPlayed", 1)) # Safety math check!
+                gp = max(1, latest_season.get("gamesPlayed", 1)) 
                 pts = latest_season.get("points", 0); goals = latest_season.get("goals", 0)
                 ppp = latest_season.get("powerPlayPoints", 0); shots = latest_season.get("shots", 0)
                 league = latest_season.get("leagueAbbrev", "N/A")
@@ -187,13 +182,11 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
             st.error("Failed to connect to NHL player profile.")
             st.stop()
 
-    # Build the profile
     current_prospect_profile = {
         'Age': prospect_age, 'NHLe': prospect_nhle, 'SGP': prospect_sgp,
         'EV_Pct': prospect_ev_pct, 'Goal_Pct': prospect_goal_pct, 'Size': prospect_size
     }
 
-    # Run the AI matching math
     for comp in historical_comps:
         dist_nhle = WEIGHT_NHLE * (prospect_nhle - comp["NHLe"])**2
         dist_age = WEIGHT_AGE * (prospect_age - comp["Age"])**2
@@ -212,7 +205,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
     with col1:
         st.subheader("Selected Prospect")
         
-        # Display the new EA Sports Grade beautifully at the top
         ea_rating = calculate_ea_rating(current_prospect_profile)
         st.metric(label="Overall Prospect Grade", value=f"{ea_rating} OVR")
         
@@ -245,4 +237,7 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         st.subheader("6-Axis Comparative Profile")
         comp_profile = {
             'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP'],
-            'EV_Pct': top_match['EV_Pct'], 'Goal_Pct': top_match['Goal_Pct'], '
+            'EV_Pct': top_match['EV_Pct'], 'Goal_Pct': top_match['Goal_Pct'], 'Size': top_match['Size']
+        }
+        spider_fig = create_hexagon_chart(current_prospect_profile, comp_profile)
+        st.pyplot(spider_fig)
