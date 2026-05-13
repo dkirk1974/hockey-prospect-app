@@ -1,4 +1,3 @@
-# Import our necessary libraries
 import streamlit as st
 import requests
 import pandas as pd
@@ -7,16 +6,15 @@ import pandas as pd
 st.title("Prospect Trajectory & NHLe Tracker")
 st.write("Select a player below to instantly calculate their NHL Equivalency (NHLe).")
 
-# Create a dictionary (a menu) of a few test subjects to prove the app can scale
-# We can add as many players here as we want for testing
+# The updated test dictionary with correct IDs
 test_players = {
     "Brayden Yager (WPG)": 8484242,
     "Connor Bedard (CHI)": 8484144,
-    "Macklin Celebrini (SJS)": 8484847,
-    "Gavin McKenna (2026 Draft Eligible)": 8485550 # Placeholder/Test ID if available, using a known ID for safety in testing
+    "Macklin Celebrini (SJS)": 8484801, # The real ID
+    "Will Smith (SJS)": 8484183 # Swapping McKenna for another active prospect
 }
 
-# Create a dropdown menu on the website. Streamlit makes this incredibly easy.
+# Create a dropdown menu
 selected_player_name = st.selectbox("Choose a Prospect:", list(test_players.keys()))
 
 # Look up the ID based on the name the user clicked
@@ -32,11 +30,9 @@ nhle_factors = {
     "NHL": 1.00
 }
 
-# Add a button so the app doesn't load data until the user is ready
+# Add a button to run the analytics
 if st.button("Run Analytics"):
     
-    # -----------------------------------------
-    # This is the exact same engine we built in Colab!
     url = f"https://api-web.nhle.com/v1/player/{player_id}/landing"
     response = requests.get(url)
 
@@ -69,16 +65,18 @@ if st.button("Run Analytics"):
             })
             
         df = pd.DataFrame(stats_list)
-        # -----------------------------------------
+
+        # THE FIX: This single line tells Pandas to treat the Season column as text (string) 
+        # instead of a massive integer, so the graph plots it correctly.
+        df['Season'] = df['Season'].astype(str)
 
         # Display the player's bio
         st.subheader(f"Data for {selected_player_name}")
         
-        # Display the data as a beautiful, interactive web table
+        # Display the data as a table
         st.dataframe(df, use_container_width=True)
         
-        # Streamlit magic: Automatically draw a line chart of their NHLe progression!
-        # We filter out the 'None' values so the chart only graphs valid NHLe seasons
+        # Draw the line chart
         chart_data = df.dropna(subset=['NHLe Projection'])
         if not chart_data.empty:
             st.write("### NHLe Trajectory Over Time")
