@@ -20,7 +20,6 @@ if 'current_selection' not in st.session_state:
 
 # --- LOAD HISTORICAL MATRIX FROM CSV ---
 if os.path.exists("historical_matrix.csv"):
-    # Convert the CSV into a list of dictionaries instantly
     historical_comps = pd.read_csv("historical_matrix.csv").to_dict('records')
 else:
     st.error("Critical Error: historical_matrix.csv is missing. The AI has no brain!")
@@ -194,6 +193,12 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         comp["Distance"] = round(math.sqrt(dist_nhle + dist_age + dist_sgp + dist_ev + dist_goal + dist_size), 2)
     
     top_match = sorted(historical_comps, key=lambda x: x["Distance"])[0] 
+    
+    # We build the comp profile early so we can grade it!
+    comp_profile = {
+        'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP'],
+        'EV_Pct': top_match['EV_Pct'], 'Goal_Pct': top_match['Goal_Pct'], 'Size': top_match['Size']
+    }
 
     st.write("---")
     col1, col2, col3 = st.columns([1, 2, 2])
@@ -206,8 +211,13 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         st.success(f"**{selected_player_name}**")
         st.write(f"Age: {prospect_age} | League: {league}")
         
-        st.write("vs.")
+        st.write("---")
+        
         st.subheader("Closest AI Match")
+        # Run the historical player through the exact same EA rating formula
+        comp_ea_rating = calculate_ea_rating(comp_profile)
+        st.metric(label="Historical OVR Grade", value=f"{comp_ea_rating} OVR", delta=f"{round(ea_rating - comp_ea_rating, 1)}", delta_color="normal")
+        
         st.image(top_match['ImageURL'], width=150)
         
         if top_match['Ceiling'] == "Draft Bust":
@@ -240,9 +250,5 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
 
     with col3:
         st.subheader("6-Axis Comparative Profile")
-        comp_profile = {
-            'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP'],
-            'EV_Pct': top_match['EV_Pct'], 'Goal_Pct': top_match['Goal_Pct'], 'Size': top_match['Size']
-        }
         spider_fig = create_hexagon_chart(current_prospect_profile, comp_profile)
         st.pyplot(spider_fig)
