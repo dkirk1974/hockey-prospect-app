@@ -35,8 +35,19 @@ if st.sidebar.button("Find Players"):
         try:
             search_response = requests.get(search_url).json()
             for player in search_response:
-                # We add the player ID to the display name so you can tell duplicates apart!
-                display_name = f"{player['name']} (NHL API - ID: {player['playerId']})"
+                # Safely extract the team abbreviation. 
+                team = player.get('teamAbbrev', None)
+                
+                # If the team field is missing or empty string (common for unsigned prospects)
+                if not team: 
+                    team = "Unsigned/Prospect"
+                
+                display_name = f"{player['name']} ({team})"
+                
+                # Failsafe: If two players somehow have the exact same name AND team
+                if display_name in st.session_state.search_results:
+                    display_name += f" - ID:{player['playerId']}"
+
                 st.session_state.search_results[display_name] = {
                     "source": "api", 
                     "id": player['playerId'], 
@@ -112,103 +123,4 @@ if analyze_btn:
         player_row = db[db['Name'] == selected_player_name].iloc[0]
         
         prospect_age = int(player_row['Age']); league = player_row['League']
-        gp = int(player_row['GP']); pts = int(player_row['PTS']); goals = int(player_row['G'])
-        ppp = int(player_row['PPP']); prospect_sgp = float(player_row['SGP'])
-        height_in = float(player_row['Height']); weight_lbs = float(player_row['Weight'])
-        prospect_image_url = player_row['ImageURL']
-
-        prospect_nhle = round((pts / gp) * nhle_factors.get(league, 0) * 82, 1)
-        prospect_ev_pct = round((pts - ppp) / pts, 2) if pts > 0 else 0
-        prospect_goal_pct = round(goals / pts, 2) if pts > 0 else 0
-        prospect_size = height_in + (weight_lbs / 10)
-
-    # Route B execution
-    elif player_data_dict["source"] == "api":
-        player_id = player_data_dict["id"]
-        url = f"https://api-web.nhle.com/v1/player/{player_id}/landing"
-        response = requests.get(url)
-        
-        if response.status_code == 200:
-            data = response.json()
-            birth_year = int(data.get("birthDate", "2000-01-01").split("-")[0])
-            height_in = data.get("heightInInches", 72); weight_lbs = data.get("weightInPounds", 180)
-            season_totals = data.get("seasonTotals", [])
-            
-            if season_totals:
-                latest_season = season_totals[-1] 
-                gp = latest_season.get("gamesPlayed", 1); pts = latest_season.get("points", 0)
-                goals = latest_season.get("goals", 0); ppp = latest_season.get("powerPlayPoints", 0)
-                shots = latest_season.get("shots", 0); league = latest_season.get("leagueAbbrev", "N/A")
-                
-                season_year = int(str(latest_season.get("season", "00000000"))[:4])
-                prospect_age = season_year - birth_year
-                
-                prospect_nhle = round((pts / gp) * nhle_factors.get(league, 0) * 82, 1)
-                prospect_sgp = round(shots / gp, 2) if shots > 0 else 2.0
-                prospect_ev_pct = round((pts - ppp) / pts, 2) if pts > 0 else 0
-                prospect_goal_pct = round(goals / pts, 2) if pts > 0 else 0
-                prospect_size = height_in + (weight_lbs / 10)
-                
-                prospect_image_url = f"https://assets.nhle.com/mugs/nhl/latest/{player_id}.png"
-            else:
-                st.error("No season data found for this player.")
-                st.stop()
-        else:
-            st.error("Failed to connect to NHL player profile.")
-            st.stop()
-
-    # Shared math & rendering
-    current_prospect_profile = {
-        'Age': prospect_age, 'NHLe': prospect_nhle, 'SGP': prospect_sgp,
-        'EV_Pct': prospect_ev_pct, 'Goal_Pct': prospect_goal_pct, 'Size': prospect_size
-    }
-
-    for comp in historical_comps:
-        dist_nhle = WEIGHT_NHLE * (prospect_nhle - comp["NHLe"])**2
-        dist_age = WEIGHT_AGE * (prospect_age - comp["Age"])**2
-        dist_sgp = WEIGHT_SGP * (prospect_sgp - comp["SGP"])**2
-        dist_ev = WEIGHT_EV * ((prospect_ev_pct * 100) - (comp["EV_Pct"] * 100))**2 
-        dist_goal = WEIGHT_GOAL * ((prospect_goal_pct * 100) - (comp["Goal_Pct"] * 100))**2
-        dist_size = WEIGHT_SIZE * (prospect_size - comp["Size"])**2
-        
-        comp["Distance"] = round(math.sqrt(dist_nhle + dist_age + dist_sgp + dist_ev + dist_goal + dist_size), 2)
-    
-    top_match = sorted(historical_comps, key=lambda x: x["Distance"])[0] 
-
-    st.write("---")
-    col1, col2, col3 = st.columns([1, 2, 2])
-    
-    with col1:
-        st.subheader("Selected Prospect")
-        st.image(prospect_image_url, width=150)
-        st.success(f"**{selected_player_name}**")
-        st.write(f"Age: {prospect_age} | League: {league}")
-        st.write("vs.")
-        st.subheader("Closest AI Match")
-        st.image(top_match['ImageURL'], width=150)
-        st.warning(f"**{top_match['Name']}**")
-        st.write(f"Match Score: {top_match['Distance']}")
-
-    with col2:
-        st.subheader("Key Analytics Head-to-Head")
-        comp_df = pd.DataFrame({
-            "Metric": ["NHLe Projection", "EV Production %", "Goal Dependency %", "Shots / Game"],
-            selected_player_name: [prospect_nhle, f"{int(prospect_ev_pct*100)}%", f"{int(prospect_goal_pct*100)}%", prospect_sgp],
-            top_match['Name']: [top_match['NHLe'], f"{int(top_match['EV_Pct']*100)}%", f"{int(top_match['Goal_Pct']*100)}%", top_match['SGP']]
-        })
-        st.dataframe(comp_df, use_container_width=True, hide_index=True)
-        
-        st.divider()
-        st.write("### Consensus Projected Ceiling")
-        ceiling = top_match['Ceiling']
-        val = 100 if ceiling == "Generational" else (85 if ceiling == "Franchise Player" else (70 if ceiling == "Top 6 Forward" else 50))
-        st.progress(val, text=f"**Current Ceiling Tier: {ceiling}**")
-
-    with col3:
-        st.subheader("6-Axis Comparative Profile")
-        comp_profile = {
-            'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP'],
-            'EV_Pct': top_match['EV_Pct'], 'Goal_Pct': top_match['Goal_Pct'], 'Size': top_match['Size']
-        }
-        spider_fig = create_hexagon_chart(current_prospect_profile, comp_profile)
-        st.pyplot(spider_fig)
+        gp = int(player_row['GP']); pts = int(player_row['PTS']); goals = int
