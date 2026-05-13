@@ -41,7 +41,8 @@ if st.sidebar.button("Find Players"):
                 display_name = f"{row['Name']} (Offline DB)"
                 st.session_state.search_results[display_name] = {"source": "csv", "name": row['Name']}
         
-        search_url = f"https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=5&q={search_query}"
+        # THE FIX: Increased limit from 5 to 20
+        search_url = f"https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=20&q={search_query}"
         try:
             search_response = requests.get(search_url).json()
             for player in search_response:
@@ -179,10 +180,8 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         'EV_Pct': prospect_ev_pct, 'Goal_Pct': prospect_goal_pct, 'Size': prospect_size
     }
 
-    # --- THE CLONE FIX: Filter before sorting ---
     valid_comps = []
     for comp in historical_comps:
-        # If the searched name is inside the CSV name (e.g., "Auston Matthews" inside "Auston Matthews (2016)"), skip it!
         if selected_player_name.lower() in comp["Name"].lower():
             continue
             
