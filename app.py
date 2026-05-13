@@ -30,7 +30,7 @@ nhle_factors = {
 # Added EV% (Even Strength Dependency), Goal% (Play-Driving Proxy), and Size Index (Height in inches + Weight/10)
 historical_comps = [
     {"Name": "Connor McDavid (Historical)", "NHLe": 68.0, "Age": 16, "SGP": 4.5, "EV_Pct": 0.70, "Goal_Pct": 0.35, "Size": 90, "Ceiling": "Generational", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8478402.png"},
-    {"Name": "Nathan MacKinnon (Historical)", "NHLe": 55.0, "Age": 16, "SGP": 4.2, "EV_Pct": 0.65, "Goal_Pct": 0.42, "Size": 91, "Ceiling": "Franchise Player", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477444.png"},
+    {"Name": "Nathan MacKinnon (Historical)", "NHLe": 55.0, "Age": 16, "SGP": 4.2, "EV_Pct": 0.65, "Goal_Pct": 0.42, "Size": 91, "Ceiling": "Franchise Player", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477492.png"},
     {"Name": "Bo Horvat (Historical)", "NHLe": 38.0, "Age": 19, "SGP": 3.2, "EV_Pct": 0.55, "Goal_Pct": 0.40, "Size": 93, "Ceiling": "Top 6 Forward", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477500.png"},
     {"Name": "Vincent Trocheck (Historical)", "NHLe": 42.0, "Age": 19, "SGP": 3.5, "EV_Pct": 0.60, "Goal_Pct": 0.45, "Size": 88, "Ceiling": "Top 6 Forward", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8476389.png"},
     {"Name": "AHL Journeyman (Historical)", "NHLe": 22.0, "Age": 20, "SGP": 1.8, "EV_Pct": 0.40, "Goal_Pct": 0.25, "Size": 90, "Ceiling": "AHL / Fringe", "ImageURL": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Generic_jersey_icon.png"}
