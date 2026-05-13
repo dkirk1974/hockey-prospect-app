@@ -11,7 +11,7 @@ test_players = {
     "Brayden Yager (WPG)": 8484242,
     "Connor Bedard (CHI)": 8484144,
     "Macklin Celebrini (SJS)": 8484801, # The real ID
-    "Will Smith (SJS)": 8484183 # Swapping McKenna for another active prospect
+    "Will Smith (SJS)": 8484227 # Swapping McKenna for another active prospect
 }
 
 # Create a dropdown menu
