@@ -18,6 +18,15 @@ if 'analyze_clicked' not in st.session_state:
 if 'current_selection' not in st.session_state:
     st.session_state.current_selection = None
 
+# --- LOAD HISTORICAL MATRIX FROM CSV ---
+if os.path.exists("historical_matrix.csv"):
+    # Convert the CSV into a list of dictionaries instantly
+    historical_comps = pd.read_csv("historical_matrix.csv").to_dict('records')
+else:
+    st.error("Critical Error: historical_matrix.csv is missing. The AI has no brain!")
+    st.stop()
+
+
 # --- STEP 1: THE SEARCH ENGINE ---
 st.sidebar.subheader("Step 1: Search Directory")
 search_query = st.sidebar.text_input("Enter Player Name (e.g., Aho, Mcdav, Iginla):", "")
@@ -27,7 +36,6 @@ if st.sidebar.button("Find Players"):
     st.session_state.analyze_clicked = False 
     
     if search_query:
-        # Route A: Search Local CSV
         if os.path.exists("prospect_db.csv"):
             db = pd.read_csv("prospect_db.csv")
             matches = db[db['Name'].str.contains(search_query, case=False, na=False)]
@@ -35,7 +43,6 @@ if st.sidebar.button("Find Players"):
                 display_name = f"{row['Name']} (Offline DB)"
                 st.session_state.search_results[display_name] = {"source": "csv", "name": row['Name']}
         
-        # Route B: Search NHL API
         search_url = f"https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=5&q={search_query}"
         try:
             search_response = requests.get(search_url).json()
@@ -66,19 +73,10 @@ if st.session_state.search_results:
         st.session_state.analyze_clicked = True
         st.session_state.current_selection = selected_option
 
-
 nhle_factors = {
     "WHL": 0.32, "OHL": 0.32, "QMJHL": 0.30, 
     "AHL": 0.47, "NCAA": 0.43, "NHL": 1.00, "CSSHL": 0.15
 }
-
-historical_comps = [
-    {"Name": "Connor McDavid (Historical)", "NHLe": 68.0, "Age": 16, "SGP": 4.5, "EV_Pct": 0.70, "Goal_Pct": 0.35, "Size": 90, "Ceiling": "Generational", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8478402.png"},
-    {"Name": "Nathan MacKinnon (Historical)", "NHLe": 55.0, "Age": 16, "SGP": 4.2, "EV_Pct": 0.65, "Goal_Pct": 0.42, "Size": 91, "Ceiling": "Franchise Player", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477492.png"},
-    {"Name": "Bo Horvat (Historical)", "NHLe": 38.0, "Age": 19, "SGP": 3.2, "EV_Pct": 0.55, "Goal_Pct": 0.40, "Size": 93, "Ceiling": "Top 6 Forward", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8477500.png"},
-    {"Name": "Vincent Trocheck (Historical)", "NHLe": 42.0, "Age": 19, "SGP": 3.5, "EV_Pct": 0.60, "Goal_Pct": 0.45, "Size": 88, "Ceiling": "Top 6 Forward", "ImageURL": "https://assets.nhle.com/mugs/nhl/latest/8476389.png"},
-    {"Name": "AHL Journeyman (Historical)", "NHLe": 22.0, "Age": 20, "SGP": 1.8, "EV_Pct": 0.40, "Goal_Pct": 0.25, "Size": 90, "Ceiling": "AHL / Fringe", "ImageURL": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Generic_jersey_icon.png"}
-]
 
 WEIGHT_NHLE = 1.0; WEIGHT_AGE = 3.0; WEIGHT_SGP = 1.5; WEIGHT_EV = 2.0; WEIGHT_GOAL = 1.0; WEIGHT_SIZE = 0.5    
 
@@ -113,7 +111,6 @@ def create_hexagon_chart(prospect_profile, comp_profile):
     plt.legend(loc='upper right', bbox_to_anchor=(0.1, 0.1))
     return fig
 
-# --- EA SPORTS SCORING ALGORITHM ---
 def calculate_ea_rating(profile):
     score_nhle = min(45, (profile['NHLe'] / 75.0) * 45)
     age_diff = max(0, 22 - profile['Age'])
@@ -126,7 +123,6 @@ def calculate_ea_rating(profile):
     curved_overall = int(40 + (raw_score * 0.6))
     return min(99, curved_overall)
 
-# --- MAIN ANALYTICS LOGIC ---
 if st.session_state.analyze_clicked and st.session_state.current_selection:
     player_data_dict = st.session_state.search_results[st.session_state.current_selection]
     selected_player_name = player_data_dict["name"]
@@ -204,10 +200,8 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
     
     with col1:
         st.subheader("Selected Prospect")
-        
         ea_rating = calculate_ea_rating(current_prospect_profile)
         st.metric(label="Overall Prospect Grade", value=f"{ea_rating} OVR")
-        
         st.image(prospect_image_url, width=150)
         st.success(f"**{selected_player_name}**")
         st.write(f"Age: {prospect_age} | League: {league}")
@@ -215,7 +209,12 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         st.write("vs.")
         st.subheader("Closest AI Match")
         st.image(top_match['ImageURL'], width=150)
-        st.warning(f"**{top_match['Name']}**")
+        
+        if top_match['Ceiling'] == "Draft Bust":
+            st.error(f"**{top_match['Name']}**")
+        else:
+            st.warning(f"**{top_match['Name']}**")
+            
         st.write(f"Match Score: {top_match['Distance']}")
 
     with col2:
@@ -230,7 +229,13 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         st.divider()
         st.write("### Consensus Projected Ceiling")
         ceiling = top_match['Ceiling']
-        val = 100 if ceiling == "Generational" else (85 if ceiling == "Franchise Player" else (70 if ceiling == "Top 6 Forward" else 50))
+        if ceiling in ["Generational", "Generational Sniper"]: val = 100
+        elif "Franchise" in ceiling: val = 85
+        elif "Top 6" in ceiling or "Elite" in ceiling: val = 75
+        elif ceiling == "Draft Bust": val = 20
+        else: val = 50
+        
+        color = "red" if ceiling == "Draft Bust" else "blue"
         st.progress(val, text=f"**Current Ceiling Tier: {ceiling}**")
 
     with col3:
