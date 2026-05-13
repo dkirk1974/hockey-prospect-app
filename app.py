@@ -110,7 +110,7 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
     player_data_dict = st.session_state.search_results[st.session_state.current_selection]
     selected_player_name = player_data_dict["name"]
     
-    app_mode = "prospect" # Defaults to prospect mode
+    app_mode = "prospect" 
     show_data_wall_warning = False
     nhl_trajectory_data = []
 
@@ -122,20 +122,17 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         birth_year = int(response.get("birthDate", "2000-01-01").split("-")[0])
         height_in = response.get("heightInInches", 72); weight_lbs = response.get("weightInPounds", 180)
         
-        # Identify Draft Year
         draft_details = response.get("draftDetails")
         if draft_details:
             draft_year = draft_details.get("year")
         else:
-            draft_year = birth_year + 18 # Proxy for undrafted players
+            draft_year = birth_year + 18 
             
-        # CHECK DATA WALL
         if draft_year < 2015:
             show_data_wall_warning = True
 
         season_totals = response.get("seasonTotals", [])
         
-        # 1. FIND DRAFT YEAR SNAPSHOT (D-0)
         target_season = f"{draft_year - 1}{draft_year}"
         draft_season_data = None
         
@@ -144,7 +141,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
                 draft_season_data = season
                 break
                 
-        # If we can't find their exact draft year, fallback to their last available season
         if not draft_season_data and season_totals:
             draft_season_data = season_totals[-1]
             
@@ -153,7 +149,7 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         ppp = draft_season_data.get("powerPlayPoints", 0); shots = draft_season_data.get("shots", 0)
         league = draft_season_data.get("leagueAbbrev", "N/A")
         
-        prospect_age = 18 # We standardize to 18 for apples-to-apples comp
+        prospect_age = 18 
         prospect_nhle = round((pts / gp) * nhle_factors.get(league, 0.20) * 82, 1)
         prospect_sgp = round(shots / gp, 2) if shots > 0 else 2.0
         prospect_ev_pct = round((pts - ppp) / pts, 2) if pts > 0 else 0
@@ -161,17 +157,15 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         prospect_size = height_in + (weight_lbs / 10)
         prospect_image_url = f"https://assets.nhle.com/mugs/nhl/latest/{player_id}.png"
 
-        # 2. CHECK FOR NHL GRADUATION (TRAJECTORY MODE)
         total_nhl_games = 0
         for season in season_totals:
             if season.get("leagueAbbrev") == "NHL":
                 s_year = int(str(season.get("season"))[:4])
-                # Only plot seasons during or after their draft year
                 if s_year >= draft_year:
                     s_gp = season.get("gamesPlayed", 0)
                     s_pts = season.get("points", 0)
                     total_nhl_games += s_gp
-                    if s_gp > 5: # Filter out 1-game emergency call-ups
+                    if s_gp > 5: 
                         nhl_trajectory_data.append({
                             "Age": s_year - birth_year,
                             "NHL Points Per Game": round(s_pts / s_gp, 2)
@@ -180,23 +174,29 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         if total_nhl_games > 20:
             app_mode = "trajectory"
 
-    # Profile Build
     current_prospect_profile = {
         'Age': prospect_age, 'NHLe': prospect_nhle, 'SGP': prospect_sgp,
         'EV_Pct': prospect_ev_pct, 'Goal_Pct': prospect_goal_pct, 'Size': prospect_size
     }
 
-    # AI Match Math
+    # --- THE CLONE FIX: Filter before sorting ---
+    valid_comps = []
     for comp in historical_comps:
+        # If the searched name is inside the CSV name (e.g., "Auston Matthews" inside "Auston Matthews (2016)"), skip it!
+        if selected_player_name.lower() in comp["Name"].lower():
+            continue
+            
         dist_nhle = WEIGHT_NHLE * (prospect_nhle - comp["NHLe"])**2
         dist_age = WEIGHT_AGE * (prospect_age - comp["Age"])**2
         dist_sgp = WEIGHT_SGP * (prospect_sgp - comp["SGP"])**2
         dist_ev = WEIGHT_EV * ((prospect_ev_pct * 100) - (comp["EV_Pct"] * 100))**2 
         dist_goal = WEIGHT_GOAL * ((prospect_goal_pct * 100) - (comp["Goal_Pct"] * 100))**2
         dist_size = WEIGHT_SIZE * (prospect_size - comp["Size"])**2
+        
         comp["Distance"] = round(math.sqrt(dist_nhle + dist_age + dist_sgp + dist_ev + dist_goal + dist_size), 2)
+        valid_comps.append(comp)
     
-    top_match = sorted(historical_comps, key=lambda x: x["Distance"])[0] 
+    top_match = sorted(valid_comps, key=lambda x: x["Distance"])[0] 
     
     comp_profile = {
         'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP'],
@@ -205,7 +205,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
 
     st.write("---")
     
-    # DATA WALL WARNING
     if show_data_wall_warning:
         st.warning(f"⚠️ **Data Wall Warning:** {selected_player_name} was drafted before 2015. Historical minor-league data from that era rarely tracked Shots on Goal or Powerplay metrics accurately. The 6-axis math below is relying on incomplete data and may be highly skewed.")
 
@@ -232,7 +231,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
             st.subheader("xActual NHL Trajectory")
             st.write("Has this player fulfilled their draft day expectations?")
             
-            # Map Expected PPG based on Ceiling
             ceiling = top_match['Ceiling']
             if "Generational" in ceiling: expected_ppg = 1.10
             elif "Franchise" in ceiling: expected_ppg = 0.90
@@ -241,7 +239,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
             elif "Late Round" in ceiling: expected_ppg = 0.25
             else: expected_ppg = 0.50
             
-            # Build the Chart Data
             if nhl_trajectory_data:
                 df_chart = pd.DataFrame(nhl_trajectory_data).set_index("Age")
                 df_chart["Expected Baseline"] = expected_ppg
