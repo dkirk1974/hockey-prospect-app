@@ -82,7 +82,6 @@ def create_hexagon_chart(prospect_profile, comp_profile):
 def calculate_ea_rating(profile):
     return min(99, int(40 + ((min(45, (profile['NHLe'] / 75.0) * 45) + min(25, (max(0, 22 - profile['Age']) / 5.0) * 25) + min(15, (profile['SGP'] / 5.0) * 15) + min(10, profile['EV_Pct'] * 10) + min(5, (profile['Size'] / 100.0) * 5)) * 0.6)))
 
-# --- THE MULTI-VARIABLE EDGE ENGINE ---
 def fetch_edge_modifier(player_id):
     endpoints = {
         "speed": f"https://api-web.nhle.com/v1/edge/skater-skating-speed-detail/{player_id}/now",
@@ -93,7 +92,6 @@ def fetch_edge_modifier(player_id):
     edge_score = 0
     metrics_found = []
     
-    # Check Speed
     try:
         res = requests.get(endpoints["speed"], timeout=3).json()
         speeds = res.get("topSkatingSpeeds", [])
@@ -107,7 +105,6 @@ def fetch_edge_modifier(player_id):
                 edge_score -= 1
     except: pass
 
-    # Check Shot
     try:
         res = requests.get(endpoints["shot"], timeout=3).json()
         top_shot = res.get("shotSpeedDetails", {}).get("topShotSpeed", {}).get("imperial", 0.0)
@@ -116,7 +113,6 @@ def fetch_edge_modifier(player_id):
             metrics_found.append(f"Elite Power ({round(top_shot,1)} mph shot)")
     except: pass
 
-    # Check Stamina/Distance
     try:
         res = requests.get(endpoints["distance"], timeout=3).json()
         details = res.get("skatingDistanceDetails", [])
@@ -134,6 +130,34 @@ def fetch_edge_modifier(player_id):
     elif edge_score < 0: return "DOWNGRADE", ["Below Average Speed metrics detected"]
     else: return "NONE", []
 
+def get_new_ceiling_base(base_ceiling, modifier, position):
+    if modifier == "NONE": return base_ceiling
+    
+    if position == "Defenseman":
+        tiers = ["Depth / AHL", "Bottom Pairing D", "Top 4 D", "Top Pairing D", "Franchise Defenseman"]
+    else:
+        tiers = ["Depth / AHL", "Bottom 6", "Middle 6", "Top 6", "1st Line", "Franchise"]
+        
+    bc_lower = base_ceiling.lower()
+    if "franchise" in bc_lower: idx = len(tiers) - 1
+    elif "1st line" in bc_lower or "top pairing" in bc_lower: idx = len(tiers) - 2
+    elif "top 6" in bc_lower or "top 4" in bc_lower: idx = len(tiers) - 3
+    elif "middle 6" in bc_lower: idx = len(tiers) - 4
+    elif "bottom 6" in bc_lower or "bottom pairing" in bc_lower: idx = 1
+    else: idx = 0 
+    
+    if modifier == "SUPER_UPGRADE": idx += 2
+    elif modifier == "UPGRADE": idx += 1
+    elif modifier == "DOWNGRADE": idx -= 1
+    
+    idx = max(0, min(idx, len(tiers) - 1))
+    new_base = tiers[idx]
+    
+    if position != "Defenseman" and new_base not in ["Depth / AHL", "Franchise"]:
+        new_base += f" {position}"
+        
+    return new_base
+
 if st.session_state.analyze_clicked and st.session_state.current_selection:
     player_data_dict = st.session_state.search_results[st.session_state.current_selection]
     selected_player_name = player_data_dict["name"]
@@ -146,8 +170,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
 
     if player_data_dict["source"] == "api":
         player_id = player_data_dict["id"]
-        
-        # PING THE MULTI-VARIABLE EDGE ENGINE
         edge_modifier, edge_metrics = fetch_edge_modifier(player_id)
         
         url = f"https://api-web.nhle.com/v1/player/{player_id}/landing"
@@ -220,14 +242,9 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
     comp_profile = {'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP'], 'EV_Pct': top_match['EV_Pct'], 'Goal_Pct': top_match['Goal_Pct'], 'Size': top_match['Size']}
     ea_rating = calculate_ea_rating(current_prospect_profile)
     
-    # --- APPLY MULTI-VARIABLE EDGE CEILING MODIFIER ---
-    ceiling = top_match['Ceiling']
-    if edge_modifier == "SUPER_UPGRADE":
-        ceiling = f"{ceiling}  (🔥 EDGE SUPER UPGRADE)"
-    elif edge_modifier == "UPGRADE":
-        ceiling = f"{ceiling}  (⬆️ EDGE UPGRADED)"
-    elif edge_modifier == "DOWNGRADE":
-        ceiling = f"{ceiling}  (⬇️ EDGE DOWNGRADED)"
+    # Text Extraction
+    raw_ceiling = top_match['Ceiling']
+    final_ceiling = get_new_ceiling_base(raw_ceiling, edge_modifier, prospect_position)
 
     st.write("---")
     if show_data_wall_warning: st.warning(f"⚠️ **Data Wall Warning:** {selected_player_name} was drafted before 2015. Historical data may be incomplete.")
@@ -261,7 +278,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
             elif "Bottom 6" in top_match['Ceiling'] or "7th D" in top_match['Ceiling']: expected_ppg = 0.25
             else: expected_ppg = 0.15
             
-            # Modifier shifts the baseline chart trajectory
             if edge_modifier == "SUPER_UPGRADE": expected_ppg += 0.25
             elif edge_modifier == "UPGRADE": expected_ppg += 0.15 
             elif edge_modifier == "DOWNGRADE": expected_ppg -= 0.15
@@ -271,7 +287,13 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
                 df_chart["Expected Baseline"] = expected_ppg
                 st.line_chart(df_chart, color=["#FF6720", "#808080"])
             else: st.info("Not enough NHL data to plot trajectory.")
-            st.write(f"**AI Projected Roster Ceiling:** {ceiling}")
+            
+            # --- THE NEW SIDE-BY-SIDE CEILING DISPLAY ---
+            st.write(f"**Draft Day Consensus Ceiling:** {raw_ceiling}")
+            if edge_modifier != "NONE":
+                tag = "🔥 SUPER UPGRADE" if edge_modifier == "SUPER_UPGRADE" else ("⬆️ UPGRADED" if edge_modifier == "UPGRADE" else "⬇️ DOWNGRADED")
+                st.success(f"**Current NHL Edge Ceiling:** {final_ceiling} ({tag})")
+                
         else:
             st.subheader("Key Analytics Head-to-Head")
             comp_df = pd.DataFrame({
@@ -281,6 +303,8 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
             })
             st.dataframe(comp_df, use_container_width=True, hide_index=True)
             st.divider()
+            
+            # Progress Bar Section
             st.write("### Projected Roster Ceiling")
             if "Franchise" in top_match['Ceiling']: val = 100
             elif "1st Line" in top_match['Ceiling'] or "Top Pairing" in top_match['Ceiling']: val = 85
@@ -293,7 +317,7 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
             elif edge_modifier == "UPGRADE": val = min(100, val + 15)
             elif edge_modifier == "DOWNGRADE": val = max(10, val - 15)
             
-            st.progress(val, text=f"**Peak Role:** {ceiling}")
+            st.progress(val, text=f"**Current Peak Role:** {final_ceiling}")
 
     with col3:
         st.subheader("Draft Year 6-Axis Profile")
@@ -302,19 +326,22 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
 
     st.divider()
     
-    # --- WATCHLIST LEADERBOARD MODULE ---
     colA, colB = st.columns([1, 4])
     with colA:
         if st.button("⭐ Save to Leaderboard", use_container_width=True):
             names = [p["Name"] for p in st.session_state.watchlist]
             if selected_player_name not in names:
+                
+                # Format the text for the table beautifully
+                table_ceiling = f"{raw_ceiling} ➡️ {final_ceiling}" if edge_modifier != "NONE" else raw_ceiling
+                
                 st.session_state.watchlist.append({
                     "Name": selected_player_name,
                     "Position": prospect_position,
                     "Draft League": league,
                     "OVR Grade": ea_rating,
                     "Closest Comp": top_match['Name'],
-                    "Projected Peak": ceiling
+                    "Projected Peak": table_ceiling
                 })
                 st.rerun() 
             else:
