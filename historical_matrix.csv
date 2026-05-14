@@ -2,7 +2,7 @@ Name,Position,NHLe,Age,SGP,EV_Pct,Goal_Pct,Size,Ceiling,ImageURL
 Connor McDavid (2015),Center,67.0,18,2.0,1.0,0.37,92.4,Franchise Center,https://assets.nhle.com/mugs/nhl/latest/8478402.png
 Jack Eichel (2015),Center,29.1,18,2.0,1.0,0.37,94.8,Franchise Center,https://assets.nhle.com/mugs/nhl/latest/8478403.png
 Dylan Strome (2015),Center,49.8,18,2.0,1.0,0.35,96.0,Franchise Center,https://assets.nhle.com/mugs/nhl/latest/8478440.png
-Mitch Marner (2015),Winger,52.5,18,2.0,1.0,0.35,90.0,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8478483.png
+Mitch Marner (2015),Center,52.5,18,2.0,1.0,0.35,90.0,1st Line Center,https://assets.nhle.com/mugs/nhl/latest/8478483.png
 Noah Hanifin (2015),Defenseman,10.2,18,2.0,1.0,0.22,95.6,Top Pairing D,https://assets.nhle.com/mugs/nhl/latest/8478396.png
 Pavel Zacha (2015),Center,24.1,18,2.0,1.0,0.47,97.1,1st Line Center,https://assets.nhle.com/mugs/nhl/latest/8478401.png
 Ivan Provorov (2015),Defenseman,26.7,18,2.0,1.0,0.25,95.4,Top Pairing D,https://assets.nhle.com/mugs/nhl/latest/8478500.png
@@ -21,7 +21,7 @@ Evgeny Svechnikov (2015),Winger,34.9,18,3.33,1.0,0.41,95.8,Top 6 Winger,https://
 Joel Eriksson Ek (2015),Center,21.0,18,2.0,1.0,0.66,95.7,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478493.png
 Colin White (2015),Center,17.4,18,2.15,1.0,0.24,92.5,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478400.png
 Brock Boeser (2015),Winger,24.5,18,4.23,1.0,0.51,93.8,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478444.png
-Travis Konecny (2015),Winger,29.7,18,2.0,1.0,0.43,89.2,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478439.png
+Travis Konecny (2015),Center,29.7,18,2.0,1.0,0.43,89.2,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478439.png
 Jack Roslovic (2015),Center,31.2,18,2.04,1.0,0.29,92.8,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478458.png
 Noah Juulsen (2015),Defenseman,20.1,18,2.0,1.0,0.17,94.1,Top 4 D,https://assets.nhle.com/mugs/nhl/latest/8478454.png
 Jacob Larsson (2015),Defenseman,10.9,18,2.0,1.0,0.5,93.3,Top 4 D,https://assets.nhle.com/mugs/nhl/latest/8478491.png
@@ -32,7 +32,7 @@ Jeremy Roy (2015),Defenseman,23.0,18,2.41,1.0,0.12,91.5,Top 4 D,https://assets.n
 Christian Fischer (2015),Winger,24.6,18,2.88,1.0,0.5,95.2,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478432.png
 Mitchell Stephens (2015),Center,20.3,18,2.0,1.0,0.46,92.3,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478477.png
 Travis Dermott (2015),Defenseman,19.4,18,2.0,1.0,0.18,92.0,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8478408.png
-Sebastian Aho (2015),Center,16.4,18,2.0,1.0,0.1,90.9,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478427.png
+Sebastian Aho (2015),Winger,16.4,18,2.0,1.0,0.1,90.9,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478427.png
 Gabriel Gagne (2015),Winger,21.7,18,3.81,1.0,0.59,95.6,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478410.png
 Brandon Carlo (2015),Defenseman,10.4,18,2.0,1.0,0.16,99.7,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8478443.png
 Paul Bittner (2015),Winger,28.2,18,2.0,1.0,0.48,96.6,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478426.png
@@ -45,7 +45,7 @@ Jakob Forsbacka Karlsson (2015),Center,21.7,18,2.32,1.0,0.28,91.4,Middle 6 Cente
 Daniel Sprong (2015),Winger,31.8,18,3.97,1.0,0.44,91.5,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478466.png
 Jansen Harkins (2015),Center,29.6,18,2.0,1.0,0.25,92.7,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478424.png
 Filip Chlapik (2015),Center,28.8,18,3.05,1.0,0.44,93.4,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478488.png
-Roope Hintz (2015),Center,6.6,18,2.0,1.0,0.29,96.7,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478449.png
+Roope Hintz (2015),Winger,6.6,18,2.0,1.0,0.29,96.7,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478449.png
 Jordan Greenway (2015),Winger,18.6,18,1.64,1.0,0.25,101.1,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478413.png
 Brendan Guhle (2015),Defenseman,11.7,18,2.0,1.0,0.16,93.7,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8478425.png
 Jeremy Lauzon (2015),Defenseman,14.8,18,1.93,1.0,0.42,97.5,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8478468.png
@@ -134,7 +134,7 @@ Connor Hobbs (2015),Defenseman,4.4,18,2.0,1.0,0.5,94.5,7th D,https://assets.nhle
 Carl Neill (2015),Defenseman,15.6,18,2.3,1.0,0.35,94.5,7th D,https://assets.nhle.com/mugs/nhl/latest/8478253.png
 Ryan Pilon (2015),Defenseman,20.1,18,2.0,1.0,0.21,95.8,7th D,https://assets.nhle.com/mugs/nhl/latest/8478395.png
 Troy Terry (2015),Winger,11.5,18,1.6,1.0,0.43,91.3,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478873.png
-Adam Gaudette (2015),Winger,12.3,18,2.56,1.0,0.43,92.0,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478874.png
+Adam Gaudette (2015),Center,12.3,18,2.56,1.0,0.43,92.0,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478874.png
 Ryan Zuhlsdorf (2015),Defenseman,8.1,18,1.2,1.0,0.14,89.8,7th D,https://assets.nhle.com/mugs/nhl/latest/8478875.png
 Radovan Bondra (2015),Winger,0.0,18,2.0,0.0,0.0,100.0,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478876.png
 Giorgio Estephan (2015),Center,20.9,18,2.0,1.0,0.45,91.6,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478877.png
@@ -166,13 +166,13 @@ Bokondji Imama (2015),Winger,13.0,18,1.89,1.0,0.53,95.3,Fringe NHLer / AHL Depth
 Joni Tuulola (2015),Defenseman,10.9,18,2.0,1.0,0.0,94.8,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478900.png
 Ivan Chukarov (2015),Defenseman,12.8,18,1.84,1.0,0.28,94.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478901.png
 Nikita Korostelev (2015),Winger,25.3,18,2.0,1.0,0.45,92.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478478.png
-Steven Lorentz (2015),Center,16.5,18,2.0,1.0,0.43,97.9,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478904.png
+Steven Lorentz (2015),Winger,16.5,18,2.0,1.0,0.43,97.9,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478904.png
 Chaz Reddekopp (2015),Defenseman,7.7,18,2.0,1.0,0.24,96.9,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478448.png
 Markus Nutivaara (2015),Defenseman,18.7,18,2.0,1.0,0.25,91.7,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478906.png
 Marcus Vela (2015),Center,15.1,18,2.0,1.0,0.43,94.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478907.png
 Gustav Olhaver (2015),Center,22.8,18,2.0,1.0,0.56,100.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478908.png
 Patrick Shea (2015),Center,17.9,18,2.0,1.0,0.42,90.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478909.png
-Matt Roy (2015),Defenseman,4.1,18,2.0,1.0,0.0,96.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478911.png
+Matt Roy (2015),Winger,4.1,18,2.0,1.0,0.0,96.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478911.png
 Jack Becker (2015),Center,12.5,18,2.0,1.0,0.69,94.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478912.png
 Riley Bruce (2015),Defenseman,1.5,18,2.0,1.0,0.0,100.2,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478913.png
 Nikita Pavlychev (2015),Center,7.8,18,1.33,1.0,0.38,99.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478914.png
@@ -188,11 +188,11 @@ Tate Olson (2015),Defenseman,9.3,18,2.0,1.0,0.21,91.4,Fringe NHLer / AHL Depth,h
 John Dahlstrom (2015),Winger,22.3,18,2.0,1.0,0.74,90.9,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8478925.png
 Auston Matthews (2016),Center,25.8,18,2.0,1.0,0.64,96.5,Franchise Center,https://assets.nhle.com/mugs/nhl/latest/8479318.png
 Patrik Laine (2016),Winger,19.7,18,3.6,1.0,0.58,96.8,Franchise Winger,https://assets.nhle.com/mugs/nhl/latest/8479339.png
-Pierre-Luc Dubois (2016),Center,39.3,18,2.0,1.0,0.42,98.0,Franchise Center,https://assets.nhle.com/mugs/nhl/latest/8479400.png
+Pierre-Luc Dubois (2016),Winger,39.3,18,2.0,1.0,0.42,98.0,Franchise Winger,https://assets.nhle.com/mugs/nhl/latest/8479400.png
 Jesse Puljujarvi (2016),Winger,19.7,18,2.0,1.0,0.46,97.6,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8479344.png
 Olli Juolevi (2016),Defenseman,19.3,18,2.28,1.0,0.21,92.2,Top Pairing D,https://assets.nhle.com/mugs/nhl/latest/8479355.png
 Matthew Tkachuk (2016),Winger,49.3,18,3.35,1.0,0.28,94.2,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8479314.png
-Clayton Keller (2016),Winger,29.4,18,2.0,1.0,0.34,87.5,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8479343.png
+Clayton Keller (2016),Center,29.4,18,2.0,1.0,0.34,87.5,1st Line Center,https://assets.nhle.com/mugs/nhl/latest/8479343.png
 Alex Nylander (2016),Winger,34.5,18,3.12,1.0,0.37,93.5,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8479423.png
 Mikhail Sergachev (2016),Defenseman,22.3,18,2.33,1.0,0.3,96.2,Top Pairing D,https://assets.nhle.com/mugs/nhl/latest/8479410.png
 Tyson Jost (2016),Center,35.5,18,2.0,1.0,0.4,89.7,1st Line Center,https://assets.nhle.com/mugs/nhl/latest/8479370.png
@@ -220,7 +220,7 @@ Egor Korshkov (2016),Winger,18.5,18,2.0,1.0,0.5,94.0,Top 6 Winger,https://assets
 Tyler Benson (2016),Winger,20.5,18,2.0,1.0,0.2,91.0,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479347.png
 Rasmus Asplund (2016),Center,12.4,18,2.0,1.0,0.33,90.0,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479335.png
 Andrew Peeke (2016),Defenseman,11.0,18,1.57,1.0,0.13,96.4,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8479369.png
-Jordan Kyrou (2016),Winger,20.6,18,2.62,1.0,0.33,91.9,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479385.png
+Jordan Kyrou (2016),Center,20.6,18,2.62,1.0,0.33,91.9,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479385.png
 Pascal Laberge (2016),Center,29.9,18,2.0,1.0,0.34,90.2,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479397.png
 Libor Hajek (2016),Defenseman,9.9,18,2.0,1.0,0.12,94.9,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8479333.png
 Adam Mascherin (2016),Winger,32.7,18,3.97,1.0,0.43,90.5,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479374.png
@@ -228,7 +228,7 @@ Alex DeBrincat (2016),Winger,44.2,18,4.48,1.0,0.5,86.0,Middle 6 Winger,https://a
 Cam Morrison (2016),Winger,10.9,18,2.0,1.0,0.5,96.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479386.png
 Nathan Bastian (2016),Winger,24.2,18,2.53,1.0,0.32,97.7,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479414.png
 Jonathan Dahlen (2016),Center,10.5,18,2.0,1.0,0.58,89.0,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479373.png
-Janne Kuokkanen (2016),Center,19.7,18,2.0,1.0,0.0,92.3,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479511.png
+Janne Kuokkanen (2016),Winger,19.7,18,2.0,1.0,0.0,92.3,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479511.png
 Boris Katchouk (2016),Winger,21.2,18,1.89,1.0,0.47,95.2,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479383.png
 Chad Krys (2016),Defenseman,7.5,18,2.0,1.0,0.06,89.5,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8479342.png
 Givani Smith (2016),Winger,17.0,18,2.0,1.0,0.55,95.4,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479379.png
@@ -280,19 +280,19 @@ Brett Murray (2016),Winger,15.7,18,2.0,1.0,0.3,99.8,Bottom 6 Winger,https://asse
 Victor Mete (2016),Defenseman,4.1,18,2.0,1.0,0.0,87.7,7th D,https://assets.nhle.com/mugs/nhl/latest/8479376.png
 Keaton Middleton (2016),Defenseman,2.8,18,1.11,1.0,0.14,102.0,7th D,https://assets.nhle.com/mugs/nhl/latest/8479387.png
 Mikhail Maltsev (2016),Winger,13.0,18,2.0,1.0,0.48,94.8,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479573.png
-Todd Burgess (2016),Center,26.0,18,3.43,1.0,0.4,91.8,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479586.png
+Todd Burgess (2016),Winger,26.0,18,3.43,1.0,0.4,91.8,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479586.png
 Max Zimmer (2016),Winger,13.8,18,2.73,1.0,0.43,92.2,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479326.png
 Brandon Duhaime (2016),Winger,16.8,18,2.0,1.0,0.31,95.0,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479520.png
 Alfons Malmstrom (2016),Defenseman,3.2,18,2.0,1.0,0.25,93.0,7th D,https://assets.nhle.com/mugs/nhl/latest/8479521.png
 Hardy Haman Aktell (2016),Defenseman,18.3,18,2.0,1.0,0.21,94.8,7th D,https://assets.nhle.com/mugs/nhl/latest/8479522.png
 Connor Bunnaman (2016),Center,14.7,18,1.94,1.0,0.42,93.7,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479382.png
 Lucas Carlsson (2016),Defenseman,12.2,18,2.0,1.0,0.44,91.0,7th D,https://assets.nhle.com/mugs/nhl/latest/8479523.png
-Noah Gregor (2016),Winger,26.6,18,2.0,1.0,0.38,92.1,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479393.png
+Noah Gregor (2016),Center,26.6,18,2.0,1.0,0.38,92.1,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479393.png
 Jacob Moverare (2016),Defenseman,6.6,18,2.0,1.0,0.5,95.5,7th D,https://assets.nhle.com/mugs/nhl/latest/8479421.png
 Nathan Noel (2016),Center,23.0,18,2.0,1.0,0.37,88.4,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8478412.png
 Riley Stillman (2016),Defenseman,8.9,18,1.39,1.0,0.29,94.7,7th D,https://assets.nhle.com/mugs/nhl/latest/8479388.png
 Alex Dostie (2016),Center,33.3,18,2.0,1.0,0.34,87.4,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479524.png
-Rhett Gardner (2016),Center,15.5,18,2.0,1.0,0.61,96.0,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479587.png
+Rhett Gardner (2016),Winger,15.5,18,2.0,1.0,0.61,96.0,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479587.png
 Damien Riat (2016),Winger,32.8,18,2.0,1.0,0.38,90.0,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479584.png
 Ross Colton (2016),Center,24.6,18,3.8,1.0,0.53,91.4,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479525.png
 Tanner Kaspick (2016),Center,15.3,18,2.0,1.0,0.42,92.8,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479349.png
@@ -322,27 +322,27 @@ Nick Caamano (2016),Winger,15.2,18,2.39,1.0,0.54,95.2,Bottom 6 Winger,https://as
 Axel Jonsson-Fjallby (2016),Winger,8.2,18,2.0,1.0,0.67,91.9,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479536.png
 Christopher Paquette (2016),Center,7.4,18,1.7,1.0,0.31,93.1,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479537.png
 Graham McPhee (2016),Winger,5.6,18,2.0,1.0,0.38,89.4,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479352.png
-Manuel Wiederer (2016),Winger,29.2,18,2.0,1.0,0.45,90.5,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479538.png
+Manuel Wiederer (2016),Center,29.2,18,2.0,1.0,0.45,90.5,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479538.png
 Niclas Almari (2016),Defenseman,0.0,18,2.0,0.0,0.0,91.0,7th D,https://assets.nhle.com/mugs/nhl/latest/8479539.png
-Jonathan Walker (2016),Winger,30.6,18,2.0,1.0,0.43,89.0,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8478978.png
+Jonathan Walker (2016),Defenseman,30.6,18,2.0,1.0,0.43,89.0,7th D,https://assets.nhle.com/mugs/nhl/latest/8478978.png
 Aapeli Rasanen (2016),Center,12.5,18,2.0,1.0,0.5,92.8,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479540.png
 Jakob Stukel (2016),Winger,8.7,18,2.0,1.0,0.5,90.2,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479541.png
 Eetu Tuulola (2016),Winger,3.5,18,2.0,1.0,0.0,96.4,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479408.png
 Patrick Kudla (2016),Defenseman,21.6,18,2.0,1.0,0.2,92.5,7th D,https://assets.nhle.com/mugs/nhl/latest/8479593.png
 Brandon Hagel (2016),Winger,17.1,18,2.0,1.0,0.28,92.6,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479542.png
-Michael Pezzetta (2016),Winger,11.5,18,2.02,1.0,0.36,95.2,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479543.png
+Michael Pezzetta (2016),Center,11.5,18,2.02,1.0,0.36,95.2,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8479543.png
 Nathan Clurman (2016),Defenseman,6.6,18,2.0,1.0,0.0,93.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479594.png
 Jesper Bratt (2016),Winger,5.8,18,2.0,1.0,0.47,87.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479407.png
 Markus Nurmi (2016),Winger,0.0,18,2.0,0.0,0.0,97.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479544.png
 Noah Carroll (2016),Defenseman,5.5,18,1.13,1.0,0.21,91.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479545.png
 Oskar Steen (2016),Center,15.9,18,2.0,1.0,0.25,89.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479546.png
-Matthew Phillips (2016),Winger,27.7,18,2.0,1.0,0.49,84.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479547.png
+Matthew Phillips (2016),Center,27.7,18,2.0,1.0,0.49,84.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479547.png
 Tanner Laczynski (2016),Center,24.8,18,2.76,1.0,0.33,94.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479550.png
 Collin Adams (2016),Winger,26.2,18,2.0,1.0,0.75,88.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479551.png
 Gabriel Fontaine (2016),Center,17.6,18,2.0,1.0,0.44,93.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479002.png
 Anthony Salinitri (2016),Center,12.7,18,1.9,1.0,0.57,86.8,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479552.png
 Blake Hillman (2016),Defenseman,9.9,18,2.0,1.0,0.27,92.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479595.png
-Maxim Mamin (2016),Center,9.2,18,2.0,1.0,0.57,94.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479553.png
+Maxim Mamin (2016),Winger,9.2,18,2.0,1.0,0.57,94.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479553.png
 Jakob Stenqvist (2016),Defenseman,28.0,18,2.0,1.0,0.34,92.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479554.png
 Chase Priskie (2016),Defenseman,21.3,18,2.0,1.0,0.15,90.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479597.png
 Oleg Sosunov (2016),Defenseman,5.0,18,2.0,1.0,0.33,103.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479598.png
@@ -376,7 +376,7 @@ Tyler Soy (2016),Center,31.0,18,2.0,1.0,0.54,89.0,Fringe NHLer / AHL Depth,https
 Otto Somppi (2016),Center,19.2,18,2.0,1.0,0.28,92.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479405.png
 Dmitriy Zaitsev (2016),Defenseman,6.8,18,2.0,1.0,0.32,90.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479604.png
 Ryan Lohin (2016),Center,16.7,18,2.0,1.0,0.41,91.2,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479570.png
-Nikolaj Krag Christensen (2016),Center,2.2,18,2.0,1.0,0.5,95.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479605.png
+Nikolaj Krag Christensen (2016),Winger,2.2,18,2.0,1.0,0.5,95.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479605.png
 Joachim Blichfeld (2016),Winger,0.0,18,2.0,0.0,0.0,93.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479571.png
 Filip Helt (2016),Winger,18.0,18,2.0,1.0,0.43,90.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479572.png
 Nico Hischier (2017),Center,37.1,18,2.0,1.0,0.44,93.0,Franchise Center,https://assets.nhle.com/mugs/nhl/latest/8480002.png
@@ -408,7 +408,7 @@ Morgan Frost (2017),Center,24.3,18,2.0,1.0,0.32,91.3,Top 6 Center,https://assets
 Shane Bowers (2017),Center,17.4,18,2.0,1.0,0.43,92.6,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480032.png
 Henri Jokiharju (2017),Defenseman,17.7,18,2.0,1.0,0.19,92.5,Top 4 D,https://assets.nhle.com/mugs/nhl/latest/8480035.png
 Eeli Tolvanen (2017),Winger,21.3,18,2.0,1.0,0.56,88.2,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480009.png
-Klim Kostin (2017),Center,23.0,18,2.0,1.0,0.57,99.2,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480011.png
+Klim Kostin (2017),Winger,23.0,18,2.0,1.0,0.57,99.2,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480011.png
 Conor Timmins (2017),Defenseman,23.9,18,2.0,1.0,0.11,96.3,Top 4 D,https://assets.nhle.com/mugs/nhl/latest/8479982.png
 Kole Lind (2017),Winger,32.6,18,2.0,1.0,0.34,93.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8479986.png
 Nicolas Hague (2017),Defenseman,18.6,18,2.0,1.0,0.39,102.5,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8479980.png
@@ -422,7 +422,7 @@ Jaret Anderson-Dolan (2017),Center,27.7,18,2.0,1.0,0.51,91.0,Middle 6 Center,htt
 Eetu Luostarinen (2017),Center,13.5,18,2.0,1.0,0.58,94.1,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480185.png
 Dylan Samberg (2017),Defenseman,6.6,18,2.0,1.0,0.0,97.6,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8480049.png
 Filip Westerlund (2017),Defenseman,5.0,18,2.0,1.0,0.14,89.0,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8480048.png
-Alexandre Texier (2017),Winger,7.8,18,2.0,1.0,0.53,92.6,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480074.png
+Alexandre Texier (2017),Center,7.8,18,2.0,1.0,0.53,92.6,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480074.png
 Robin Salo (2017),Defenseman,10.4,18,2.0,1.0,0.06,92.1,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8480071.png
 Alex Formenton (2017),Winger,13.7,18,2.0,1.0,0.47,94.5,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480029.png
 Alexander Volkov (2017),Winger,11.3,18,2.0,1.0,0.55,92.5,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480186.png
@@ -478,7 +478,7 @@ Matthew Strome (2017),Winger,4.1,18,2.0,1.0,1.0,96.6,Bottom 6 Winger,https://ass
 Maksim Sushko (2017),Winger,15.5,18,2.0,1.0,0.53,92.6,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480201.png
 Noel Hoefenmayer (2017),Defenseman,16.9,18,2.0,1.0,0.35,91.1,7th D,https://assets.nhle.com/mugs/nhl/latest/8480202.png
 Adam Ruzicka (2017),Center,16.4,18,2.0,1.0,0.5,97.5,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480008.png
-Tim Soderlund (2017),Center,8.5,18,2.0,1.0,0.43,85.3,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480203.png
+Tim Soderlund (2017),Winger,8.5,18,2.0,1.0,0.43,85.3,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480203.png
 Alexey Toropchenko (2017),Winger,0.0,18,2.0,0.0,0.0,100.5,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480281.png
 Ostap Safin (2017),Winger,13.1,18,2.0,1.0,0.75,97.4,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480076.png
 Bryce Misley (2017),Center,22.1,18,2.0,1.0,0.42,91.5,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480204.png
@@ -486,13 +486,13 @@ Emil Bemstrom (2017),Center,6.6,18,2.0,1.0,0.5,91.0,Bottom 6 Center,https://asse
 Markus Phillips (2017),Defenseman,4.1,18,2.0,1.0,0.0,92.5,7th D,https://assets.nhle.com/mugs/nhl/latest/8480206.png
 Roope Laavainen (2017),Defenseman,7.2,18,2.0,1.0,0.24,94.0,7th D,https://assets.nhle.com/mugs/nhl/latest/8480207.png
 Tobias Geisser (2017),Defenseman,4.8,18,2.0,1.0,0.3,98.7,7th D,https://assets.nhle.com/mugs/nhl/latest/8480283.png
-Drake Batherson (2017),Winger,23.4,18,2.0,1.0,0.38,95.9,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480208.png
+Drake Batherson (2017),Center,23.4,18,2.0,1.0,0.38,95.9,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480208.png
 Kyle Olson (2017),Winger,20.8,18,2.0,1.0,0.35,89.2,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480209.png
 Brandon Crawley (2017),Defenseman,11.6,18,2.0,1.0,0.26,93.2,7th D,https://assets.nhle.com/mugs/nhl/latest/8479027.png
 Vladislav Kara (2017),Winger,10.6,18,2.0,1.0,0.55,91.7,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480284.png
 Igor Shvyrev (2017),Center,28.7,18,2.0,1.0,0.3,93.0,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480210.png
 Michael Karow (2017),Defenseman,7.4,18,2.0,1.0,0.19,94.0,7th D,https://assets.nhle.com/mugs/nhl/latest/8480211.png
-Lucas Elvenes (2017),Center,9.8,18,2.0,1.0,0.33,90.3,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480044.png
+Lucas Elvenes (2017),Winger,9.8,18,2.0,1.0,0.33,90.3,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480044.png
 Tyler Steenbergen (2017),Center,32.8,18,2.0,1.0,0.57,88.8,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480212.png
 David Noel (2017),Defenseman,9.6,18,2.0,1.0,0.21,90.5,7th D,https://assets.nhle.com/mugs/nhl/latest/8480214.png
 Cole Fraser (2017),Defenseman,8.2,18,2.0,1.0,0.32,93.5,7th D,https://assets.nhle.com/mugs/nhl/latest/8480215.png
@@ -636,7 +636,7 @@ Gabriel Fortier (2018),Winger,22.0,18,2.0,1.0,0.44,88.9,Middle 6 Winger,https://
 David Gustafsson (2018),Center,13.1,18,2.0,1.0,0.25,93.6,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481019.png
 Ivan Morozov (2018),Center,12.6,18,2.0,1.0,0.48,90.8,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480894.png
 Jack McBain (2018),Center,16.4,18,2.0,1.0,0.6,97.9,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480855.png
-Jan Jenik (2018),Center,23.0,18,2.0,1.0,0.86,93.4,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480890.png
+Jan Jenik (2018),Winger,23.0,18,2.0,1.0,0.86,93.4,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480890.png
 Cam Hillis (2018),Center,25.8,18,2.0,1.0,0.34,88.9,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480858.png
 Alec Regula (2018),Defenseman,9.8,18,2.0,1.0,0.28,97.1,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8480831.png
 Tyler Madden (2018),Center,15.9,18,2.0,1.0,0.43,88.0,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480805.png
@@ -663,7 +663,7 @@ Nate Smith (2018),Center,18.9,18,2.0,1.0,0.36,89.7,Middle 6 Center,https://asset
 Connor Dewar (2018),Center,26.2,18,2.0,1.0,0.56,88.7,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480980.png
 Riley Sutter (2018),Winger,20.5,18,2.0,1.0,0.47,96.4,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480791.png
 Matej Pekar (2018),Center,3.3,18,2.0,1.0,0.0,91.5,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480881.png
-Jonathan Gruden (2018),Winger,27.9,18,2.0,1.0,0.44,91.2,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480836.png
+Jonathan Gruden (2018),Center,27.9,18,2.0,1.0,0.44,91.2,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480836.png
 Luke Henman (2018),Center,19.0,18,2.0,1.0,0.19,87.2,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480869.png
 Allan McShane (2018),Center,25.5,18,2.0,1.0,0.31,90.2,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480854.png
 Ryan O'Reilly (2018),Winger,15.5,18,2.0,1.0,0.62,95.2,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481026.png
@@ -681,7 +681,7 @@ Xavier Bernard (2018),Defenseman,13.0,18,2.0,1.0,0.31,95.5,7th D,https://assets.
 Jachym Kondelik (2018),Center,15.8,18,2.0,1.0,0.47,102.2,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481029.png
 Jack St. Ivany (2018),Defenseman,13.7,18,2.0,1.0,0.17,95.7,7th D,https://assets.nhle.com/mugs/nhl/latest/8481030.png
 Aidan Dudas (2018),Center,3.3,18,2.0,1.0,1.0,85.0,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480850.png
-Paul Cotter (2018),Winger,15.7,18,2.0,1.0,0.46,95.3,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481032.png
+Paul Cotter (2018),Center,15.7,18,2.0,1.0,0.46,95.3,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481032.png
 Jack Perbix (2018),Winger,9.8,18,2.0,1.0,0.67,91.0,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480815.png
 Linus Lindstrand Cronholm (2018),Defenseman,2.7,18,2.0,1.0,0.0,95.8,7th D,https://assets.nhle.com/mugs/nhl/latest/8480982.png
 Mac Hollowell (2018),Defenseman,23.3,18,2.0,1.0,0.21,85.2,7th D,https://assets.nhle.com/mugs/nhl/latest/8480439.png
@@ -691,7 +691,7 @@ Alexander Green (2018),Defenseman,12.2,18,2.0,1.0,0.2,94.4,7th D,https://assets.
 Milos Roman (2018),Center,21.5,18,2.0,1.0,0.31,90.8,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480792.png
 Jack Gorniak (2018),Winger,38.3,18,2.0,1.0,0.5,88.7,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8480889.png
 Miska Kukkonen (2018),Defenseman,5.5,18,2.0,1.0,0.5,93.9,7th D,https://assets.nhle.com/mugs/nhl/latest/8480983.png
-Angus Crookshank (2018),Center,17.6,18,2.0,1.0,0.49,88.3,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481065.png
+Angus Crookshank (2018),Winger,17.6,18,2.0,1.0,0.49,88.3,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481065.png
 Wyatte Wylie (2018),Defenseman,11.3,18,2.0,1.0,0.19,91.0,7th D,https://assets.nhle.com/mugs/nhl/latest/8480984.png
 Cole Fonstad (2018),Center,26.6,18,2.0,1.0,0.29,86.5,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480809.png
 Justin Almeida (2018),Center,35.7,18,2.0,1.0,0.44,87.5,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8480985.png
@@ -743,10 +743,10 @@ William Worge Kreu (2018),Defenseman,3.3,18,2.0,1.0,1.0,95.8,Fringe NHLer / AHL 
 Jakov Novak (2018),Winger,21.4,18,2.0,1.0,0.44,95.2,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481078.png
 Liam Kirk (2018),Winger,5.0,18,2.0,1.0,0.56,88.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8480892.png
 Brett Stapley (2018),Center,18.6,18,2.0,1.0,0.46,90.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481079.png
-Otto Kivenmaki (2018),Winger,16.4,18,2.0,1.0,0.3,83.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481047.png
+Otto Kivenmaki (2018),Center,16.4,18,2.0,1.0,0.3,83.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481047.png
 Josiah Slavin (2018),Winger,14.3,18,2.0,1.0,0.55,95.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481004.png
 Luke Loheit (2018),Winger,20.5,18,2.0,1.0,0.4,90.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481081.png
-Patrik Siikanen (2018),Winger,11.6,18,2.0,1.0,0.59,92.8,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481048.png
+Patrik Siikanen (2018),Center,11.6,18,2.0,1.0,0.59,92.8,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481048.png
 Christian Krygier (2018),Defenseman,0.0,18,2.0,0.0,0.0,95.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481049.png
 Dmitry Zavgorodniy (2018),Winger,32.8,18,2.0,1.0,0.5,86.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481005.png
 Jermaine Loewen (2018),Winger,25.4,18,2.0,1.0,0.56,98.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8479646.png
@@ -785,8 +785,8 @@ Ville Heinola (2019),Defenseman,14.5,18,2.0,1.0,0.14,90.1,Top 4 D,https://assets
 Sam Poulin (2019),Winger,3.3,18,2.0,1.0,0.0,95.7,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481591.png
 Tobias Bjornfot (2019),Defenseman,9.3,18,2.0,1.0,0.5,92.0,Top 4 D,https://assets.nhle.com/mugs/nhl/latest/8481600.png
 Simon Holmstrom (2019),Winger,15.6,18,2.0,1.0,0.35,93.8,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481601.png
-Philip Tomasino (2019),Winger,28.2,18,2.0,1.0,0.47,90.7,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481577.png
-Connor McMichael (2019),Winger,28.2,18,2.0,1.0,0.5,90.0,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481580.png
+Philip Tomasino (2019),Center,28.2,18,2.0,1.0,0.47,90.7,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481577.png
+Connor McMichael (2019),Center,28.2,18,2.0,1.0,0.5,90.0,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481580.png
 Jakob Pelletier (2019),Winger,8.2,18,2.0,1.0,0.5,87.2,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481592.png
 Nolan Foote (2019),Winger,25.0,18,2.0,1.0,0.57,94.6,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481518.png
 Ryan Suzuki (2019),Center,26.2,18,2.0,1.0,0.12,91.5,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481576.png
@@ -813,7 +813,7 @@ Samuel Fagemo (2019),Winger,28.7,18,2.0,1.0,0.71,92.0,Middle 6 Winger,https://as
 Simon Lundmark (2019),Defenseman,5.1,18,2.0,1.0,0.0,93.0,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8481547.png
 Vladislav Kolyachonok (2019),Defenseman,26.2,18,2.0,1.0,0.0,93.8,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8481609.png
 Nicholas Robertson (2019),Winger,16.4,18,2.0,1.0,0.8,87.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481582.png
-Robert Mastrosimone (2019),Center,16.4,18,2.0,1.0,0.6,87.0,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481561.png
+Robert Mastrosimone (2019),Winger,16.4,18,2.0,1.0,0.6,87.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481561.png
 Dillon Hamaliuk (2019),Winger,22.0,18,2.0,1.0,0.42,94.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481549.png
 Brett Leason (2019),Winger,42.5,18,2.0,1.0,0.4,99.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481517.png
 Samuel Bolduc (2019),Defenseman,14.0,18,2.0,1.0,0.24,98.4,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8481541.png
@@ -837,7 +837,7 @@ Gianni Fairbrother (2019),Defenseman,14.8,18,2.0,1.0,0.28,92.4,Bottom Pairing D,
 Alex Beaucage (2019),Winger,28.6,18,2.0,1.0,0.49,92.2,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481595.png
 Pavel Dorofeyev (2019),Winger,26.8,18,2.0,1.0,0.55,92.4,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481604.png
 Graeme Clarke (2019),Winger,9.8,18,2.0,1.0,0.67,89.5,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481578.png
-Cole Schwindt (2019),Center,18.9,18,2.0,1.0,0.39,96.0,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481655.png
+Cole Schwindt (2019),Winger,18.9,18,2.0,1.0,0.39,96.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481655.png
 Michael Vukojevic (2019),Defenseman,0.0,18,2.0,0.0,0.0,96.5,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8481583.png
 Anttoni Honka (2019),Defenseman,8.8,18,2.0,1.0,0.25,89.4,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8481615.png
 Mikko Kokkonen (2019),Defenseman,12.0,18,2.0,1.0,0.16,92.0,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8481614.png
@@ -845,7 +845,7 @@ Layton Ahac (2019),Defenseman,9.9,18,2.0,1.0,0.12,94.5,Bottom Pairing D,https://
 Ilya Nikolaev (2019),Center,23.0,18,2.0,1.0,0.14,91.0,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481590.png
 Maxim Cajkovic (2019),Winger,18.9,18,2.0,1.0,0.48,89.5,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481738.png
 Domenick Fensore (2019),Defenseman,21.9,18,2.0,1.0,0.14,86.5,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8481562.png
-Aliaksei Protas (2019),Winger,17.2,18,2.0,1.0,0.28,103.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481656.png
+Aliaksei Protas (2019),Center,17.2,18,2.0,1.0,0.28,103.0,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481656.png
 Quinn Olson (2019),Winger,20.0,18,2.0,1.0,0.3,88.0,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8481739.png
 Viktor Lodin (2019),Center,16.4,18,2.0,1.0,0.39,92.5,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8481657.png
 Jordan Spence (2019),Defenseman,17.7,18,2.0,1.0,0.12,89.8,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8481606.png
@@ -916,7 +916,7 @@ Egor Serdyuk (2019),Winger,25.4,18,2.0,1.0,0.38,85.8,Fringe NHLer / AHL Depth,ht
 Marshall Warren (2019),Defenseman,10.2,18,2.0,1.0,0.31,90.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481569.png
 Greg Meireles (2019),Center,37.4,18,2.0,1.0,0.37,88.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8480438.png
 Arsen Khisamutdinov (2019),Center,22.0,18,2.0,1.0,0.47,93.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481672.png
-Luka Burzan (2019),Center,30.1,18,2.0,1.0,0.51,90.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481220.png
+Luka Burzan (2019),Winger,30.1,18,2.0,1.0,0.51,90.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481220.png
 Nikita Nesterenko (2019),Center,9.8,18,2.0,1.0,0.67,94.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481754.png
 Benjamin Brinkman (2019),Defenseman,6.5,18,2.0,1.0,0.14,93.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481755.png
 Danil Savunov (2019),Winger,5.5,18,2.0,1.0,0.4,84.7,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481673.png
@@ -959,8 +959,8 @@ Arvid Costmar (2019),Center,3.3,18,2.0,1.0,0.0,89.0,Fringe NHLer / AHL Depth,htt
 Massimo Rizzo (2019),Center,17.7,18,2.0,1.0,0.28,87.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481760.png
 Jeremy Michel (2019),Winger,16.1,18,2.0,1.0,0.38,88.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8481693.png
 Alexis Lafrenière (2020),Winger,53.0,18,2.0,1.0,0.31,93.1,Franchise Winger,https://assets.nhle.com/mugs/nhl/latest/8482109.png
-Quinton Byfield (2020),Winger,16.4,18,2.0,1.0,0.6,100.0,Franchise Winger,https://assets.nhle.com/mugs/nhl/latest/8482124.png
-Tim Stützle (2020),Center,13.6,18,2.0,1.0,0.21,90.7,Franchise Center,https://assets.nhle.com/mugs/nhl/latest/8482116.png
+Quinton Byfield (2020),Center,16.4,18,2.0,1.0,0.6,100.0,Franchise Center,https://assets.nhle.com/mugs/nhl/latest/8482124.png
+Tim Stützle (2020),Winger,13.6,18,2.0,1.0,0.21,90.7,Franchise Winger,https://assets.nhle.com/mugs/nhl/latest/8482116.png
 Lucas Raymond (2020),Winger,25.5,18,2.0,1.0,0.21,89.6,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8482078.png
 Jake Sanderson (2020),Defenseman,17.7,18,2.0,1.0,0.24,94.2,Top Pairing D,https://assets.nhle.com/mugs/nhl/latest/8482105.png
 Jamie Drysdale (2020),Defenseman,16.4,18,2.0,1.0,0.0,89.5,Top Pairing D,https://assets.nhle.com/mugs/nhl/latest/8482142.png
@@ -970,7 +970,7 @@ Marco Rossi (2020),Center,56.2,18,2.0,1.0,0.33,87.2,1st Line Center,https://asse
 Cole Perfetti (2020),Center,39.4,18,2.0,1.0,0.67,89.5,1st Line Center,https://assets.nhle.com/mugs/nhl/latest/8482149.png
 Anton Lundell (2020),Center,22.4,18,2.0,1.0,0.36,92.6,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482113.png
 Seth Jarvis (2020),Center,44.3,18,2.0,1.0,0.43,88.0,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482093.png
-Dylan Holloway (2020),Winger,17.1,18,2.0,1.0,0.47,93.7,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482077.png
+Dylan Holloway (2020),Center,17.1,18,2.0,1.0,0.47,93.7,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482077.png
 Rodion Amirov (2020),Winger,6.0,18,2.0,1.0,0.0,88.7,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482099.png
 Kaiden Guhle (2020),Defenseman,16.4,18,2.0,1.0,0.28,95.2,Top 4 D,https://assets.nhle.com/mugs/nhl/latest/8482087.png
 Lukas Reichel (2020),Winger,9.4,18,2.0,1.0,0.5,89.0,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482117.png
@@ -1035,9 +1035,9 @@ Jake Boltmann (2020),Defenseman,10.9,18,2.0,1.0,0.22,91.8,Bottom Pairing D,https
 Wyatt Kaiser (2020),Defenseman,16.4,18,2.0,1.0,0.67,91.0,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8482176.png
 Joni Jurmo (2020),Defenseman,10.7,18,2.0,1.0,0.18,94.0,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8482170.png
 Alex Laferriere (2020),Winger,22.0,18,2.0,1.0,0.42,93.5,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482155.png
-Maxim Groshev (2020),Defenseman,10.2,18,2.0,1.0,0.6,93.6,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8482168.png
+Maxim Groshev (2020),Winger,10.2,18,2.0,1.0,0.6,93.6,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482168.png
 Dylan Peterson (2020),Center,15.9,18,2.0,1.0,0.32,96.9,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482121.png
-Justin Sourdif (2020),Center,24.9,18,2.0,1.0,0.48,91.5,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482088.png
+Justin Sourdif (2020),Winger,24.9,18,2.0,1.0,0.48,91.5,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482088.png
 Leo Loof (2020),Defenseman,5.7,18,2.0,1.0,0.13,94.1,Bottom Pairing D,https://assets.nhle.com/mugs/nhl/latest/8482478.png
 Trevor Kuntar (2020),Center,24.7,18,2.0,1.0,0.53,92.5,Middle 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482479.png
 Alexander Ljungkrantz (2020),Winger,28.7,18,2.0,1.0,0.43,90.9,Middle 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482480.png
@@ -1168,11 +1168,11 @@ Cole Sillinger (2021),Center,30.4,18,2.0,1.0,0.52,92.2,Top 6 Center,https://asse
 Matt Coronato (2021),Winger,34.2,18,2.0,1.0,0.56,88.3,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482679.png
 Isak Rosen (2021),Winger,65.6,18,2.0,1.0,0.5,90.5,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482765.png
 Brennan Othmann (2021),Winger,7.7,18,2.0,1.0,0.44,91.2,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482747.png
-Zack Bolduc (2021),Winger,26.4,18,2.0,1.0,0.34,90.7,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482737.png
+Zack Bolduc (2021),Center,26.4,18,2.0,1.0,0.34,90.7,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482737.png
 Chaz Lucius (2021),Center,44.2,18,2.0,1.0,0.65,91.7,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482780.png
 Fedor Svechkov (2021),Center,6.5,18,2.0,1.0,0.33,90.7,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482768.png
 Fabian Lysell (2021),Winger,19.4,18,2.0,1.0,0.23,89.6,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482763.png
-Xavier Bourgault (2021),Winger,33.9,18,2.0,1.0,0.5,89.5,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482673.png
+Xavier Bourgault (2021),Center,33.9,18,2.0,1.0,0.5,89.5,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482673.png
 Wyatt Johnston (2021),Center,9.4,18,2.0,1.0,0.5,91.7,Top 6 Center,https://assets.nhle.com/mugs/nhl/latest/8482740.png
 Mackie Samoskevich (2021),Winger,21.1,18,2.0,1.0,0.35,89.0,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8482713.png
 Corson Ceulemans (2021),Defenseman,22.6,18,2.0,1.0,0.36,93.8,Top 4 D,https://assets.nhle.com/mugs/nhl/latest/8482678.png
@@ -1505,7 +1505,7 @@ Jackson Dorrington (2022),Defenseman,20.5,18,2.0,1.0,0.4,96.6,Fringe NHLer / AHL
 Ben Hemmerling (2022),Winger,21.6,18,2.0,1.0,0.21,88.7,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483748.png
 Matthew Seminoff (2022),Winger,23.4,18,2.0,1.0,0.46,90.9,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483514.png
 Jack Sparkes (2022),Defenseman,5.3,18,2.0,1.0,0.42,101.7,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483517.png
-Ryan Hofer (2022),Center,22.7,18,2.0,1.0,0.43,93.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8482960.png
+Ryan Hofer (2022),Winger,22.7,18,2.0,1.0,0.43,93.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8482960.png
 Luke Devlin (2022),Center,12.3,18,2.0,1.0,0.67,92.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483743.png
 Landon Sim (2022),Winger,8.6,18,2.0,1.0,0.57,86.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483741.png
 Servac Petrovsky (2022),Center,21.8,18,2.0,1.0,0.52,86.2,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483502.png
@@ -1518,7 +1518,7 @@ Connor Kurth (2022),Winger,26.8,18,2.0,1.0,0.43,94.1,Fringe NHLer / AHL Depth,ht
 Chris Romaine (2022),Defenseman,5.7,18,2.0,1.0,0.25,91.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483725.png
 Petteri Nurmi (2022),Defenseman,2.4,18,2.0,1.0,0.25,89.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483724.png
 Eli Barnett (2022),Defenseman,4.0,18,2.0,1.0,0.23,99.9,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483722.png
-Kyle Jackson (2022),Winger,36.2,18,2.0,1.0,0.48,93.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483013.png
+Kyle Jackson (2022),Center,36.2,18,2.0,1.0,0.48,93.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483013.png
 Santeri Sulku (2022),Winger,15.0,18,2.0,1.0,0.41,93.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483720.png
 Artem Barabosha (2022),Defenseman,4.0,18,2.0,1.0,0.36,93.9,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483721.png
 Riku Tohila (2022),Center,6.0,18,2.0,1.0,0.47,96.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483719.png
@@ -1536,7 +1536,7 @@ Linus Sjodin (2022),Center,14.4,18,2.0,1.0,0.71,88.7,Fringe NHLer / AHL Depth,ht
 Brennan Ali (2022),Center,16.4,18,2.0,1.0,0.75,91.3,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483421.png
 David Gucciardi (2022),Defenseman,10.8,18,2.0,1.0,0.45,91.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8482683.png
 Liam Arnsby (2022),Center,14.8,18,2.0,1.0,0.35,88.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483422.png
-Kaleb Lawrence (2022),Center,0.0,18,2.0,0.0,0.0,102.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483052.png
+Kaleb Lawrence (2022),Winger,0.0,18,2.0,0.0,0.0,102.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483052.png
 Miguël Tourigny (2022),Defenseman,32.8,18,2.0,1.0,0.47,86.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483092.png
 Reese Laubach (2022),Center,28.4,18,2.0,1.0,0.42,88.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483702.png
 Brandon Lisowsky (2022),Winger,22.4,18,2.0,1.0,0.57,85.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483700.png
@@ -1555,7 +1555,7 @@ Dmitriy Simashev (2023),Defenseman,0.0,18,2.0,0.0,0.0,95.8,Top Pairing D,https:/
 Matvei Michkov (2023),Winger,0.0,18,2.0,0.0,0.0,87.2,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8484387.png
 Ryan Leonard (2023),Winger,47.3,18,2.0,1.0,0.54,93.5,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8484186.png
 Nate Danielson (2023),Center,30.1,18,2.0,1.0,0.42,93.5,1st Line Center,https://assets.nhle.com/mugs/nhl/latest/8484160.png
-Dalibor Dvorsky (2023),Winger,6.0,18,2.0,1.0,0.43,93.7,1st Line Winger,https://assets.nhle.com/mugs/nhl/latest/8484164.png
+Dalibor Dvorsky (2023),Center,6.0,18,2.0,1.0,0.43,93.7,1st Line Center,https://assets.nhle.com/mugs/nhl/latest/8484164.png
 Tom Willander (2023),Defenseman,32.8,18,2.0,1.0,0.5,91.0,Top 4 D,https://assets.nhle.com/mugs/nhl/latest/8484240.png
 Daniil But (2023),Winger,16.4,18,2.0,1.0,0.58,97.3,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8484388.png
 Zach Benson (2023),Winger,23.0,18,2.0,1.0,0.29,87.7,Top 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8484145.png
@@ -1641,7 +1641,7 @@ Alex Pharand (2023),Center,15.3,18,2.0,1.0,0.46,94.8,Bottom 6 Center,https://ass
 Alexander Rykov (2023),Winger,10.9,18,2.0,1.0,0.0,89.6,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8484402.png
 Florian Xhekaj (2023),Winger,9.6,18,2.0,1.0,0.52,94.5,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8484403.png
 Terrell Goldsmith (2023),Defenseman,4.1,18,2.0,1.0,0.33,98.3,7th D,https://assets.nhle.com/mugs/nhl/latest/8484175.png
-Cole Knuble (2023),Winger,23.7,18,2.0,1.0,0.45,88.4,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8483787.png
+Cole Knuble (2023),Center,23.7,18,2.0,1.0,0.45,88.4,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8483787.png
 Patrick Thomas (2023),Center,22.3,18,2.0,1.0,0.3,89.2,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8484404.png
 Ty Mueller (2023),Center,25.9,18,2.0,1.0,0.48,89.5,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8484406.png
 Jakub Stancl (2023),Center,16.4,18,2.0,1.0,0.5,96.7,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8484229.png
@@ -1699,7 +1699,7 @@ Aiden Celebrini (2023),Defenseman,7.3,18,2.0,1.0,0.24,91.7,Fringe NHLer / AHL De
 Ryan MacPherson (2023),Center,20.4,18,2.0,1.0,0.41,89.6,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484447.png
 Sean Keohane (2023),Defenseman,7.0,18,2.0,1.0,0.17,95.8,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484454.png
 Cooper Foster (2023),Center,15.0,18,2.0,1.0,0.53,88.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484456.png
-Austin Roest (2023),Winger,34.1,18,2.0,1.0,0.41,88.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483844.png
+Austin Roest (2023),Center,34.1,18,2.0,1.0,0.41,88.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8483844.png
 Zachary Schulz (2023),Defenseman,5.5,18,2.0,1.0,0.1,92.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484225.png
 Dylan Roobroeck (2023),Center,20.5,18,2.0,1.0,0.28,101.2,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484461.png
 Warren Clark (2023),Defenseman,11.3,18,2.0,1.0,0.16,93.2,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484462.png
@@ -1715,7 +1715,7 @@ Angus MacDonell (2023),Center,13.5,18,2.0,1.0,0.71,89.7,Fringe NHLer / AHL Depth
 Michael Emerson (2023),Winger,21.9,18,2.0,1.0,0.47,92.2,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484469.png
 Luke Coughlin (2023),Defenseman,12.6,18,2.0,1.0,0.26,87.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484470.png
 Tuomas Uronen (2023),Winger,0.0,18,2.0,0.0,0.0,91.8,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484466.png
-Jack Harvey (2023),Winger,24.5,18,2.0,1.0,0.54,86.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8482774.png
+Jack Harvey (2023),Center,24.5,18,2.0,1.0,0.54,86.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8482774.png
 Oiva Keskinen (2023),Center,17.7,18,2.0,1.0,0.49,90.0,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484472.png
 Janne Peltonen (2023),Defenseman,3.7,18,2.0,1.0,0.33,92.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484473.png
 David Klee (2023),Center,12.3,18,2.0,1.0,0.33,92.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484474.png
@@ -1883,9 +1883,9 @@ Markus Loponen (2024),Center,16.4,18,2.0,1.0,0.0,91.6,Bottom 6 Center,https://as
 Justin Poirier (2024),Winger,29.7,18,2.0,1.0,0.62,85.5,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8485048.png
 Niilopekka Muhonen (2024),Defenseman,6.6,18,2.0,1.0,0.5,97.8,7th D,https://assets.nhle.com/mugs/nhl/latest/8485041.png
 Nathan Aspinall (2024),Winger,13.7,18,2.0,1.0,0.53,97.8,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8485039.png
-Connor Clattenburg (2024),Center,10.5,18,2.0,1.0,0.33,95.5,Bottom 6 Center,https://assets.nhle.com/mugs/nhl/latest/8484529.png
+Connor Clattenburg (2024),Winger,10.5,18,2.0,1.0,0.33,95.5,Bottom 6 Winger,https://assets.nhle.com/mugs/nhl/latest/8484529.png
 Maxmilian Curran (2024),Center,9.8,18,2.0,1.0,0.33,92.9,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484846.png
-Anthony Romani (2024),Center,42.8,18,2.0,1.0,0.52,90.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484565.png
+Anthony Romani (2024),Winger,42.8,18,2.0,1.0,0.52,90.5,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484565.png
 Ty Henry (2024),Defenseman,3.4,18,2.0,1.0,0.0,93.7,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8485056.png
 Jared Woolley (2024),Defenseman,18.1,18,2.0,1.0,0.29,97.4,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8484844.png
 Luke Ashton (2024),Defenseman,11.1,18,2.0,1.0,0.5,101.1,Fringe NHLer / AHL Depth,https://assets.nhle.com/mugs/nhl/latest/8485068.png
