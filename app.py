@@ -37,16 +37,21 @@ if st.sidebar.button("Find Players"):
         
         search_url = f"https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=20&q={search_query}"
         try:
-            search_response = requests.get(search_url).json()
-            for player in search_response:
-                team = player.get('teamAbbrev', "Unsigned/Prospect")
-                if not team: team = "Unsigned/Prospect"
-                display_name = f"{player['name']} ({team})"
-                if display_name in st.session_state.search_results: display_name += f" - ID:{player['playerId']}"
-                st.session_state.search_results[display_name] = {
-                    "source": "api", "id": player['playerId'], "name": player['name'],
-                    "pos": player.get("positionCode", "F")
-                }
+            # SHOCK ABSORBER 1: Safely check the search API
+            search_res = requests.get(search_url, timeout=5)
+            if search_res.status_code == 200:
+                search_response = search_res.json()
+                for player in search_response:
+                    team = player.get('teamAbbrev', "Unsigned/Prospect")
+                    if not team: team = "Unsigned/Prospect"
+                    display_name = f"{player['name']} ({team})"
+                    if display_name in st.session_state.search_results: display_name += f" - ID:{player['playerId']}"
+                    st.session_state.search_results[display_name] = {
+                        "source": "api", "id": player['playerId'], "name": player['name'],
+                        "pos": player.get("positionCode", "F")
+                    }
+            else:
+                st.sidebar.warning("NHL Search API is currently busy. Try again in a moment.")
         except Exception as e:
             st.sidebar.error("Error communicating with NHL Search API.")
 
@@ -93,36 +98,42 @@ def fetch_edge_modifier(player_id):
     metrics_found = []
     
     try:
-        res = requests.get(endpoints["speed"], timeout=3).json()
-        speeds = res.get("topSkatingSpeeds", [])
-        if speeds:
-            top_speed = speeds[0].get("skatingSpeed", {}).get("imperial", 0.0)
-            bursts = sum(1 for s in speeds if s.get("skatingSpeed", {}).get("imperial", 0.0) > 20.0)
-            if top_speed >= 22.0 or bursts >= 5:
-                edge_score += 1
-                metrics_found.append(f"Elite Speed ({round(top_speed,1)} mph)")
-            elif top_speed < 20.5 and bursts == 0:
-                edge_score -= 1
-    except: pass
-
-    try:
-        res = requests.get(endpoints["shot"], timeout=3).json()
-        top_shot = res.get("shotSpeedDetails", {}).get("topShotSpeed", {}).get("imperial", 0.0)
-        if top_shot >= 90.0:
-            edge_score += 1
-            metrics_found.append(f"Elite Power ({round(top_shot,1)} mph shot)")
-    except: pass
-
-    try:
-        res = requests.get(endpoints["distance"], timeout=3).json()
-        details = res.get("skatingDistanceDetails", [])
-        for d in details:
-            if d.get("strengthCode") == "all":
-                percentile = d.get("distanceTotal", {}).get("percentile", 0.0)
-                if percentile >= 0.90:
+        res = requests.get(endpoints["speed"], timeout=3)
+        if res.status_code == 200:
+            data = res.json()
+            speeds = data.get("topSkatingSpeeds", [])
+            if speeds:
+                top_speed = speeds[0].get("skatingSpeed", {}).get("imperial", 0.0)
+                bursts = sum(1 for s in speeds if s.get("skatingSpeed", {}).get("imperial", 0.0) > 20.0)
+                if top_speed >= 22.0 or bursts >= 5:
                     edge_score += 1
-                    metrics_found.append(f"Elite Stamina ({int(percentile*100)}th %ile dist)")
-                break
+                    metrics_found.append(f"Elite Speed ({round(top_speed,1)} mph)")
+                elif top_speed < 20.5 and bursts == 0:
+                    edge_score -= 1
+    except: pass
+
+    try:
+        res = requests.get(endpoints["shot"], timeout=3)
+        if res.status_code == 200:
+            data = res.json()
+            top_shot = data.get("shotSpeedDetails", {}).get("topShotSpeed", {}).get("imperial", 0.0)
+            if top_shot >= 90.0:
+                edge_score += 1
+                metrics_found.append(f"Elite Power ({round(top_shot,1)} mph shot)")
+    except: pass
+
+    try:
+        res = requests.get(endpoints["distance"], timeout=3)
+        if res.status_code == 200:
+            data = res.json()
+            details = data.get("skatingDistanceDetails", [])
+            for d in details:
+                if d.get("strengthCode") == "all":
+                    percentile = d.get("distanceTotal", {}).get("percentile", 0.0)
+                    if percentile >= 0.90:
+                        edge_score += 1
+                        metrics_found.append(f"Elite Stamina ({int(percentile*100)}th %ile dist)")
+                    break
     except: pass
 
     if edge_score >= 2: return "SUPER_UPGRADE", metrics_found
@@ -186,8 +197,18 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
         edge_modifier, edge_metrics = fetch_edge_modifier(player_id)
         
         url = f"https://api-web.nhle.com/v1/player/{player_id}/landing"
-        response = requests.get(url).json()
         
+        # SHOCK ABSORBER 2: Safely check the main landing API
+        try:
+            landing_res = requests.get(url, timeout=5)
+            if landing_res.status_code != 200:
+                st.error(f"The NHL API is temporarily blocking our requests (Error {landing_res.status_code}). Please wait a minute before trying again.")
+                st.stop()
+            response = landing_res.json()
+        except Exception as e:
+            st.error("Failed to connect to the NHL API. The server may be down.")
+            st.stop()
+            
         raw_pos = player_data_dict.get("pos", "F")
         if raw_pos == "C": prospect_position = "Center"
         elif raw_pos in ["L", "R", "W"]: prospect_position = "Winger"
@@ -271,186 +292,4 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
     # --- PULL THE GHOST DATA (HISTORICAL COMP) ---
     comp_player_id = top_match['ImageURL'].split('/')[-1].split('.')[0]
     comp_draft_year = 2015
-    try: comp_draft_year = int(top_match['Name'].split('(')[-1].replace(')', '').strip())
-    except: pass
-
-    comp_edge_modifier, comp_edge_metrics = fetch_edge_modifier(comp_player_id)
-    comp_landing_url = f"https://api-web.nhle.com/v1/player/{comp_player_id}/landing"
-    comp_total_nhl_games = 0; comp_max_nhl_ppg = 0.0; comp_trajectory_data = []
-    
-    try:
-        comp_landing = requests.get(comp_landing_url).json()
-        comp_birth_year = int(comp_landing.get("birthDate", "2000-01-01").split("-")[0])
-        for season in comp_landing.get("seasonTotals", []):
-            if season.get("leagueAbbrev") == "NHL":
-                s_year = int(str(season.get("season"))[:4])
-                s_gp = season.get("gamesPlayed", 0); s_pts = season.get("points", 0)
-                comp_total_nhl_games += s_gp
-                if s_gp >= 20:
-                    ppg = s_pts / s_gp
-                    if ppg > comp_max_nhl_ppg: comp_max_nhl_ppg = ppg
-                if s_year >= comp_draft_year and s_gp > 5:
-                    comp_trajectory_data.append({"Age": s_year - comp_birth_year, "NHL Points Per Game": round(s_pts / s_gp, 2)})
-    except: pass
-
-    comp_is_veteran = comp_total_nhl_games > 300
-    comp_app_mode = "trajectory" if comp_total_nhl_games > 20 else "prospect"
-    
-    # --- COMP CEILING LOGIC ---
-    if comp_is_veteran:
-        comp_verified_ceiling = calculate_verified_ceiling(comp_max_nhl_ppg, prospect_position)
-        comp_final_ceiling = comp_verified_ceiling
-    else:
-        comp_final_ceiling = get_new_ceiling_base(raw_ceiling, comp_edge_modifier, prospect_position)
-
-    st.write("---")
-    if show_data_wall_warning: st.warning(f"⚠️ **Data Wall Warning:** {selected_player_name} was drafted before 2015. Historical data may be incomplete.")
-
-    col1, col2, col3 = st.columns([1, 2, 2])
-    with col1:
-        st.subheader("Draft Year Snapshot")
-        st.metric(label="D-0 Prospect Grade", value=f"{ea_rating} OVR")
-        st.image(prospect_image_url, width=150)
-        st.success(f"**{selected_player_name}** ({prospect_position})")
-        st.write(f"Draft Year League: {league}")
-        
-        st.write("---")
-        st.subheader("Closest AI Match")
-        comp_ea_rating = calculate_ea_rating(comp_profile)
-        st.metric(label="Historical OVR Grade", value=f"{comp_ea_rating} OVR", delta=f"{round(ea_rating - comp_ea_rating, 1)}", delta_color="normal")
-        st.image(top_match['ImageURL'], width=150)
-        st.warning(f"**{top_match['Name']}**")
-        st.write(f"Match Score: {top_match['Distance']}")
-
-    with col2:
-        # THE DUAL-TAB SYSTEM
-        tab1, tab2 = st.tabs([f"🔵 {selected_player_name.split(' ')[0]}'s NHL Reality", f"🟠 Comp's NHL Reality"])
-        
-        with tab1:
-            if app_mode == "trajectory":
-                if edge_modifier != "NONE" and not is_veteran: st.info(f"⚡ **NHL Edge Dominance Detected:** {', '.join(edge_metrics)}")
-                if "Franchise" in raw_ceiling: expected_ppg = 1.00
-                elif "1st Line" in raw_ceiling or "Top Pairing" in raw_ceiling: expected_ppg = 0.80
-                elif "Top 6" in raw_ceiling or "Top 4" in raw_ceiling: expected_ppg = 0.60
-                elif "Middle 6" in raw_ceiling or "Bottom Pairing" in raw_ceiling: expected_ppg = 0.40
-                elif "Bottom 6" in raw_ceiling or "7th D" in raw_ceiling: expected_ppg = 0.25
-                else: expected_ppg = 0.15
-                
-                if not is_veteran:
-                    if edge_modifier == "SUPER_UPGRADE": expected_ppg += 0.25
-                    elif edge_modifier == "UPGRADE": expected_ppg += 0.15 
-                    elif edge_modifier == "DOWNGRADE": expected_ppg -= 0.15
-                
-                if nhl_trajectory_data:
-                    df_chart = pd.DataFrame(nhl_trajectory_data).set_index("Age")
-                    df_chart["Expected Baseline"] = expected_ppg
-                    st.line_chart(df_chart, color=["#004C97", "#808080"]) # BLUE
-                else: st.info("Not enough NHL data to plot trajectory.")
-                
-                if is_veteran:
-                    st.info(f"🏆 **Veteran Override Active:** {total_nhl_games} NHL games played.")
-                    st.success(f"**Verified Career Peak:** {verified_ceiling} *(Peak: {round(max_nhl_ppg, 2)} PPG)*")
-                else:
-                    st.write(f"**Draft Day Consensus Ceiling:** {raw_ceiling}")
-                    if edge_modifier != "NONE":
-                        tag = "🔥 SUPER UPGRADE" if edge_modifier == "SUPER_UPGRADE" else ("⬆️ UPGRADED" if edge_modifier == "UPGRADE" else "⬇️ DOWNGRADED")
-                        st.success(f"**Current NHL Edge Ceiling:** {final_ceiling} ({tag})")
-            else:
-                st.subheader("Key Analytics Head-to-Head")
-                comp_df = pd.DataFrame({
-                    "Metric": ["NHLe Projection", "EV Production %", "Goal Dependency %", "Shots / Game"],
-                    selected_player_name: [prospect_nhle, f"{int(prospect_ev_pct*100)}%", f"{int(prospect_goal_pct*100)}%", prospect_sgp],
-                    top_match['Name']: [top_match['NHLe'], f"{int(top_match['EV_Pct']*100)}%", f"{int(top_match['Goal_Pct']*100)}%", top_match['SGP']]
-                })
-                st.dataframe(comp_df, use_container_width=True, hide_index=True)
-
-            st.divider()
-            st.write("### Projected Roster Ceiling")
-            val = 50
-            display_ceil = final_ceiling if is_veteran else final_ceiling
-            if "Franchise" in display_ceil: val = 100
-            elif "1st Line" in display_ceil or "Top Pairing" in display_ceil: val = 85
-            elif "Top 6" in display_ceil or "Top 4" in display_ceil: val = 70
-            elif "Middle 6" in display_ceil or "Bottom Pairing" in display_ceil: val = 50
-            elif "Bottom 6" in display_ceil or "7th D" in display_ceil: val = 35
-            else: val = 20
-            
-            st.progress(val, text=f"**Peak Role:** {display_ceil}")
-
-        with tab2:
-            st.write(f"### {top_match['Name'].split('(')[0].strip()}")
-            if comp_app_mode == "trajectory":
-                if comp_edge_modifier != "NONE" and not comp_is_veteran: st.info(f"⚡ **NHL Edge Dominance Detected:** {', '.join(comp_edge_metrics)}")
-                if "Franchise" in raw_ceiling: comp_expected_ppg = 1.00
-                elif "1st Line" in raw_ceiling or "Top Pairing" in raw_ceiling: comp_expected_ppg = 0.80
-                elif "Top 6" in raw_ceiling or "Top 4" in raw_ceiling: comp_expected_ppg = 0.60
-                elif "Middle 6" in raw_ceiling or "Bottom Pairing" in raw_ceiling: comp_expected_ppg = 0.40
-                elif "Bottom 6" in raw_ceiling or "7th D" in raw_ceiling: comp_expected_ppg = 0.25
-                else: comp_expected_ppg = 0.15
-                
-                if not comp_is_veteran:
-                    if comp_edge_modifier == "SUPER_UPGRADE": comp_expected_ppg += 0.25
-                    elif comp_edge_modifier == "UPGRADE": comp_expected_ppg += 0.15 
-                    elif comp_edge_modifier == "DOWNGRADE": comp_expected_ppg -= 0.15
-                
-                if comp_trajectory_data:
-                    comp_df_chart = pd.DataFrame(comp_trajectory_data).set_index("Age")
-                    comp_df_chart["Expected Baseline"] = comp_expected_ppg
-                    st.line_chart(comp_df_chart, color=["#FF6720", "#808080"]) # ORANGE
-                else: st.info("Not enough NHL data to plot trajectory.")
-                
-                if comp_is_veteran:
-                    st.info(f"🏆 **Veteran Override Active:** {comp_total_nhl_games} NHL games played.")
-                    st.success(f"**Verified Career Peak:** {comp_verified_ceiling} *(Peak: {round(comp_max_nhl_ppg, 2)} PPG)*")
-                else:
-                    st.write(f"**Draft Day Consensus Ceiling:** {raw_ceiling}")
-                    if comp_edge_modifier != "NONE":
-                        tag = "🔥 SUPER UPGRADE" if comp_edge_modifier == "SUPER_UPGRADE" else ("⬆️ UPGRADED" if comp_edge_modifier == "UPGRADE" else "⬇️ DOWNGRADED")
-                        st.success(f"**Current NHL Edge Ceiling:** {comp_final_ceiling} ({tag})")
-            else:
-                st.info("Not enough NHL data to plot trajectory yet.")
-                
-            st.divider()
-            st.write("### Projected Roster Ceiling")
-            val_comp = 50
-            display_comp_ceil = comp_final_ceiling
-            if "Franchise" in display_comp_ceil: val_comp = 100
-            elif "1st Line" in display_comp_ceil or "Top Pairing" in display_comp_ceil: val_comp = 85
-            elif "Top 6" in display_comp_ceil or "Top 4" in display_comp_ceil: val_comp = 70
-            elif "Middle 6" in display_comp_ceil or "Bottom Pairing" in display_comp_ceil: val_comp = 50
-            elif "Bottom 6" in display_comp_ceil or "7th D" in display_comp_ceil: val_comp = 35
-            else: val_comp = 20
-            
-            st.progress(val_comp, text=f"**Peak Role:** {display_comp_ceil}")
-
-    with col3:
-        st.subheader("Draft Year 6-Axis Profile")
-        spider_fig = create_hexagon_chart(current_prospect_profile, comp_profile)
-        st.pyplot(spider_fig)
-
-    st.divider()
-    
-    colA, colB = st.columns([1, 4])
-    with colA:
-        if st.button("⭐ Save to Leaderboard", use_container_width=True):
-            names = [p["Name"] for p in st.session_state.watchlist]
-            if selected_player_name not in names:
-                if is_veteran: table_ceiling = f"🏆 {final_ceiling}"
-                else: table_ceiling = f"{raw_ceiling} ➡️ {final_ceiling}" if edge_modifier != "NONE" else raw_ceiling
-                
-                st.session_state.watchlist.append({
-                    "Name": selected_player_name,
-                    "Position": prospect_position,
-                    "Draft League": league,
-                    "OVR Grade": ea_rating,
-                    "Closest Comp": top_match['Name'],
-                    "Projected Peak": table_ceiling
-                })
-                st.rerun() 
-            else:
-                st.info("Already saved.")
-                
-    if st.session_state.watchlist:
-        st.subheader("📋 Draft Day Leaderboard")
-        wl_df = pd.DataFrame(st.session_state.watchlist).sort_values(by="OVR Grade", ascending=False)
-        st.dataframe(wl_df, use_container_width=True, hide_index=True)
+    try: comp_draft_year = int(top_match['Name'].split('
