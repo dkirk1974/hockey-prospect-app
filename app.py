@@ -132,11 +132,8 @@ def fetch_edge_modifier(player_id):
 
 def get_new_ceiling_base(base_ceiling, modifier, position):
     if modifier == "NONE": return base_ceiling
-    
-    if position == "Defenseman":
-        tiers = ["Depth / AHL", "Bottom Pairing D", "Top 4 D", "Top Pairing D", "Franchise Defenseman"]
-    else:
-        tiers = ["Depth / AHL", "Bottom 6", "Middle 6", "Top 6", "1st Line", "Franchise"]
+    if position == "Defenseman": tiers = ["Depth / AHL", "Bottom Pairing D", "Top 4 D", "Top Pairing D", "Franchise Defenseman"]
+    else: tiers = ["Depth / AHL", "Bottom 6", "Middle 6", "Top 6", "1st Line", "Franchise"]
         
     bc_lower = base_ceiling.lower()
     if "franchise" in bc_lower: idx = len(tiers) - 1
@@ -153,10 +150,23 @@ def get_new_ceiling_base(base_ceiling, modifier, position):
     idx = max(0, min(idx, len(tiers) - 1))
     new_base = tiers[idx]
     
-    if position != "Defenseman" and new_base not in ["Depth / AHL", "Franchise"]:
-        new_base += f" {position}"
-        
+    if position != "Defenseman" and new_base not in ["Depth / AHL", "Franchise"]: new_base += f" {position}"
     return new_base
+
+def calculate_verified_ceiling(max_ppg, position):
+    if position in ["Center", "Winger"]:
+        if max_ppg >= 0.95: return f"Franchise {position}"
+        elif max_ppg >= 0.75: return f"1st Line {position}"
+        elif max_ppg >= 0.55: return f"Top 6 {position}"
+        elif max_ppg >= 0.35: return f"Middle 6 {position}"
+        elif max_ppg >= 0.20: return f"Bottom 6 {position}"
+        else: return "Fringe NHLer / AHL Depth"
+    else:
+        if max_ppg >= 0.70: return "Franchise Defenseman"
+        elif max_ppg >= 0.50: return "Top Pairing D"
+        elif max_ppg >= 0.35: return "Top 4 D"
+        elif max_ppg >= 0.20: return "Bottom Pairing D"
+        else: return "7th D / Fringe"
 
 if st.session_state.analyze_clicked and st.session_state.current_selection:
     player_data_dict = st.session_state.search_results[st.session_state.current_selection]
@@ -167,8 +177,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
     
     edge_modifier = "NONE"
     edge_metrics = []
-    
-    # --- VETERAN OVERRIDE TRACKERS ---
     is_veteran = False
     max_nhl_ppg = 0.0
     total_nhl_games = 0
@@ -217,7 +225,6 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
                 s_gp = season.get("gamesPlayed", 0); s_pts = season.get("points", 0)
                 total_nhl_games += s_gp
                 
-                # Track career peak for Veteran Override
                 if s_gp >= 20: 
                     ppg = s_pts / s_gp
                     if ppg > max_nhl_ppg: max_nhl_ppg = ppg
@@ -253,148 +260,13 @@ if st.session_state.analyze_clicked and st.session_state.current_selection:
     comp_profile = {'Age': top_match['Age'], 'NHLe': top_match['NHLe'], 'SGP': top_match['SGP'], 'EV_Pct': top_match['EV_Pct'], 'Goal_Pct': top_match['Goal_Pct'], 'Size': top_match['Size']}
     ea_rating = calculate_ea_rating(current_prospect_profile)
     
-    # --- CEILING LOGIC INCLUDING VETERAN OVERRIDE ---
+    # --- PROSPECT CEILING LOGIC ---
     raw_ceiling = top_match['Ceiling']
-    
-    verified_ceiling = ""
     if is_veteran:
-        if prospect_position in ["Center", "Winger"]:
-            if max_nhl_ppg >= 0.95: verified_ceiling = f"Franchise {prospect_position}"
-            elif max_nhl_ppg >= 0.75: verified_ceiling = f"1st Line {prospect_position}"
-            elif max_nhl_ppg >= 0.55: verified_ceiling = f"Top 6 {prospect_position}"
-            elif max_nhl_ppg >= 0.35: verified_ceiling = f"Middle 6 {prospect_position}"
-            elif max_nhl_ppg >= 0.20: verified_ceiling = f"Bottom 6 {prospect_position}"
-            else: verified_ceiling = "Fringe NHLer / AHL Depth"
-        elif prospect_position == "Defenseman":
-            if max_nhl_ppg >= 0.70: verified_ceiling = "Franchise Defenseman"
-            elif max_nhl_ppg >= 0.50: verified_ceiling = "Top Pairing D"
-            elif max_nhl_ppg >= 0.35: verified_ceiling = "Top 4 D"
-            elif max_nhl_ppg >= 0.20: verified_ceiling = "Bottom Pairing D"
-            else: verified_ceiling = "7th D / Fringe"
-            
+        verified_ceiling = calculate_verified_ceiling(max_nhl_ppg, prospect_position)
         final_ceiling = verified_ceiling
     else:
         final_ceiling = get_new_ceiling_base(raw_ceiling, edge_modifier, prospect_position)
 
-    st.write("---")
-    if show_data_wall_warning: st.warning(f"⚠️ **Data Wall Warning:** {selected_player_name} was drafted before 2015. Historical data may be incomplete.")
-
-    col1, col2, col3 = st.columns([1, 2, 2])
-    with col1:
-        st.subheader("Draft Year Snapshot")
-        st.metric(label="D-0 Prospect Grade", value=f"{ea_rating} OVR")
-        st.image(prospect_image_url, width=150)
-        st.success(f"**{selected_player_name}** ({prospect_position})")
-        st.write(f"Draft Year League: {league}")
-        
-        st.write("---")
-        st.subheader("Closest AI Match")
-        comp_ea_rating = calculate_ea_rating(comp_profile)
-        st.metric(label="Historical OVR Grade", value=f"{comp_ea_rating} OVR", delta=f"{round(ea_rating - comp_ea_rating, 1)}", delta_color="normal")
-        st.image(top_match['ImageURL'], width=150)
-        st.warning(f"**{top_match['Name']}**")
-        st.write(f"Match Score: {top_match['Distance']}")
-
-    with col2:
-        if app_mode == "trajectory":
-            st.subheader("xActual NHL Trajectory")
-            if edge_modifier != "NONE" and not is_veteran:
-                st.info(f"⚡ **NHL Edge Dominance Detected:** {', '.join(edge_metrics)}")
-                
-            if "Franchise" in top_match['Ceiling']: expected_ppg = 1.00
-            elif "1st Line" in top_match['Ceiling'] or "Top Pairing" in top_match['Ceiling']: expected_ppg = 0.80
-            elif "Top 6" in top_match['Ceiling'] or "Top 4" in top_match['Ceiling']: expected_ppg = 0.60
-            elif "Middle 6" in top_match['Ceiling'] or "Bottom Pairing" in top_match['Ceiling']: expected_ppg = 0.40
-            elif "Bottom 6" in top_match['Ceiling'] or "7th D" in top_match['Ceiling']: expected_ppg = 0.25
-            else: expected_ppg = 0.15
-            
-            if not is_veteran:
-                if edge_modifier == "SUPER_UPGRADE": expected_ppg += 0.25
-                elif edge_modifier == "UPGRADE": expected_ppg += 0.15 
-                elif edge_modifier == "DOWNGRADE": expected_ppg -= 0.15
-            
-            if nhl_trajectory_data:
-                df_chart = pd.DataFrame(nhl_trajectory_data).set_index("Age")
-                df_chart["Expected Baseline"] = expected_ppg
-                st.line_chart(df_chart, color=["#FF6720", "#808080"])
-            else: st.info("Not enough NHL data to plot trajectory.")
-            
-            # --- THE VETERAN OVERRIDE DISPLAY ---
-            if is_veteran:
-                st.info(f"🏆 **Veteran Override Active:** With {total_nhl_games} NHL games played, future projections are obsolete.")
-                st.success(f"**Verified Career Peak:** {verified_ceiling} *(Peak: {round(max_nhl_ppg, 2)} PPG)*")
-            else:
-                st.write(f"**Draft Day Consensus Ceiling:** {raw_ceiling}")
-                if edge_modifier != "NONE":
-                    tag = "🔥 SUPER UPGRADE" if edge_modifier == "SUPER_UPGRADE" else ("⬆️ UPGRADED" if edge_modifier == "UPGRADE" else "⬇️ DOWNGRADED")
-                    st.success(f"**Current NHL Edge Ceiling:** {final_ceiling} ({tag})")
-                
-        else:
-            st.subheader("Key Analytics Head-to-Head")
-            comp_df = pd.DataFrame({
-                "Metric": ["NHLe Projection", "EV Production %", "Goal Dependency %", "Shots / Game"],
-                selected_player_name: [prospect_nhle, f"{int(prospect_ev_pct*100)}%", f"{int(prospect_goal_pct*100)}%", prospect_sgp],
-                top_match['Name']: [top_match['NHLe'], f"{int(top_match['EV_Pct']*100)}%", f"{int(top_match['Goal_Pct']*100)}%", top_match['SGP']]
-            })
-            st.dataframe(comp_df, use_container_width=True, hide_index=True)
-            st.divider()
-            
-            # Progress Bar Section
-            st.write("### Projected Roster Ceiling")
-            
-            if is_veteran:
-                if "Franchise" in verified_ceiling: val = 100
-                elif "1st Line" in verified_ceiling or "Top Pairing" in verified_ceiling: val = 85
-                elif "Top 6" in verified_ceiling or "Top 4" in verified_ceiling: val = 70
-                elif "Middle 6" in verified_ceiling or "Bottom Pairing" in verified_ceiling: val = 50
-                elif "Bottom 6" in verified_ceiling or "7th D" in verified_ceiling: val = 35
-                else: val = 20
-                st.progress(val, text=f"**Verified Role:** {final_ceiling}")
-            else:
-                if "Franchise" in top_match['Ceiling']: val = 100
-                elif "1st Line" in top_match['Ceiling'] or "Top Pairing" in top_match['Ceiling']: val = 85
-                elif "Top 6" in top_match['Ceiling'] or "Top 4" in top_match['Ceiling']: val = 70
-                elif "Middle 6" in top_match['Ceiling'] or "Bottom Pairing" in top_match['Ceiling']: val = 50
-                elif "Bottom 6" in top_match['Ceiling'] or "7th D" in top_match['Ceiling']: val = 35
-                else: val = 20
-                
-                if edge_modifier == "SUPER_UPGRADE": val = min(100, val + 25)
-                elif edge_modifier == "UPGRADE": val = min(100, val + 15)
-                elif edge_modifier == "DOWNGRADE": val = max(10, val - 15)
-                
-                st.progress(val, text=f"**Current Peak Role:** {final_ceiling}")
-
-    with col3:
-        st.subheader("Draft Year 6-Axis Profile")
-        spider_fig = create_hexagon_chart(current_prospect_profile, comp_profile)
-        st.pyplot(spider_fig)
-
-    st.divider()
-    
-    colA, colB = st.columns([1, 4])
-    with colA:
-        if st.button("⭐ Save to Leaderboard", use_container_width=True):
-            names = [p["Name"] for p in st.session_state.watchlist]
-            if selected_player_name not in names:
-                
-                if is_veteran:
-                    table_ceiling = f"🏆 {final_ceiling}"
-                else:
-                    table_ceiling = f"{raw_ceiling} ➡️ {final_ceiling}" if edge_modifier != "NONE" else raw_ceiling
-                
-                st.session_state.watchlist.append({
-                    "Name": selected_player_name,
-                    "Position": prospect_position,
-                    "Draft League": league,
-                    "OVR Grade": ea_rating,
-                    "Closest Comp": top_match['Name'],
-                    "Projected Peak": table_ceiling
-                })
-                st.rerun() 
-            else:
-                st.info("Already saved.")
-                
-    if st.session_state.watchlist:
-        st.subheader("📋 Draft Day Leaderboard")
-        wl_df = pd.DataFrame(st.session_state.watchlist).sort_values(by="OVR Grade", ascending=False)
-        st.dataframe(wl_df, use_container_width=True, hide_index=True)
+    # --- PULL THE GHOST DATA (HISTORICAL COMP) ---
+    comp_player_id = top_match['ImageURL'].split('/')
